@@ -1,0 +1,47 @@
+import { observable, action, computed, toJS } from 'mobx'
+
+import { BaseStore } from '.'
+import { IBaseRequest } from '../intf/IBase'
+import AgentHelper, { request } from '../../helpers/agent'
+import RequestLifeCycles from '../../props/RequestLifeCycles'
+import { IKeyString } from '../../intf/IKeyString'
+import { AxiosResponse, AxiosError } from 'axios'
+
+interface IPrismicPluginConstructor {
+  agent: AgentHelper
+  req: {
+    fetch: string
+  }
+}
+
+export default class PrismicPlugin extends BaseStore {
+
+  private agent: AgentHelper
+
+  private req: IKeyString
+
+  @observable _request: IBaseRequest
+
+  constructor({ agent, req }: IPrismicPluginConstructor) {
+    super()
+    this.agent = agent
+    this.req = req
+    this._request = request(RequestLifeCycles.idle)
+  }
+
+  @computed get request(): any {
+    return toJS(this._request)
+  }
+
+  @action async fetch(): Promise<void> {
+    this._request = request(RequestLifeCycles.triggered)
+    this.agent.make(this.req.fetch)
+      .then((r: AxiosResponse) => {
+        this._request = request(RequestLifeCycles.completed, r)
+      })
+      .catch((e: AxiosError) => {
+        console.log(e)
+        this._request = request(RequestLifeCycles.completed, e.response)
+      })
+  }
+}
