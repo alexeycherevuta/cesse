@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run remove:build && npx tsc && npm run copy:polyfills && tools/version.sh patch",
+    "publish": "cd build && npm publish",
     "linter": "npx tslint --project tslint.rules.json",
     "test": "npx jest",
     "test:coverage": "npx jest --coverage",
