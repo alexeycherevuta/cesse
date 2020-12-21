@@ -1,12 +1,12 @@
 {
-  "name": "cyberforce-essentials",
+  "name": "@cyberforce/cyberforce-essentials",
   "version": "0.0.3",
-  "description": "Core package for Cyberforce solution. You can use it to build amazing web applications.",
+  "description": "Core package for websites based on Cyberforce framework. Transforming ideas into reliable applications.",
   "main": "index.js",
   "scripts": {
     "build": "npm run remove:build && npx tsc && npm run copy:polyfills && tools/version.sh patch",
-    "publish": "cd build && npm publish",
     "linter": "npx tslint --project tslint.rules.json",
+    "publish": "cd build && npm publish",
     "test": "npx jest",
     "test:coverage": "npx jest --coverage",
     "test:watch": "npx jest --watchAll --runInBand",
