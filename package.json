@@ -17,7 +17,8 @@
     "type": "git",
     "url": "git@gitlab.com:cyberforce-developers/cyberforce-serverless/cyberforce-essentials.git"
   },
-  "author": "",
+  "author": "Grzegorz Wozniak & Cyberforce IT team",
+  "copyright": "All rights reserved (C) 2018-2020",
   "license": "ISC",
   "pre-commit": [
     "linter",
