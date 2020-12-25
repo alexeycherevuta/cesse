@@ -4,13 +4,14 @@
   "description": "Core package for websites based on Cyberforce framework. Transforming ideas into reliable applications.",
   "main": "index.js",
   "scripts": {
-    "build": "npm run remove:build && npx tsc && npm run copy:polyfills && tools/version.sh patch",
+    "build": "npm run remove:build && npx tsc && npm run copy:polyfills && npm run copy:npmrc && tools/version.sh patch",
     "linter": "npx tslint --project tslint.rules.json",
     "publish": "cd build && npm publish",
     "test": "npx jest",
     "test:coverage": "npx jest --coverage",
     "test:watch": "npx jest --watchAll --runInBand",
     "remove:build": "npx rimraf ./build",
+    "copy:npmrc": "cp ./src/client/polyfills.js ./build/polyfills.js",
     "copy:polyfills": "cp ./src/client/polyfills.js ./build/polyfills.js"
   },
   "repository": {
