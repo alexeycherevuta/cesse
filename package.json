@@ -11,7 +11,7 @@
     "test:coverage": "npx jest --coverage",
     "test:watch": "npx jest --watchAll --runInBand",
     "remove:build": "npx rimraf ./build",
-    "copy:npmrc": "cp ./src/client/polyfills.js ./build/polyfills.js",
+    "copy:npmrc": "cp .npmrc ./build/.npmrc",
     "copy:polyfills": "cp ./src/client/polyfills.js ./build/polyfills.js"
   },
   "repository": {
