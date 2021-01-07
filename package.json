@@ -1,6 +1,6 @@
 {
   "name": "cyberforce-essentials",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Core package for websites based on Cyberforce framework. Transforming ideas into reliable applications.",
   "main": "index.js",
   "scripts": {
