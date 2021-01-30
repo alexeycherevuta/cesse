@@ -11,6 +11,7 @@
     "test:coverage": "npx jest --coverage",
     "test:watch": "npx jest --watchAll --runInBand",
     "remove:build": "npx rimraf ./build",
+    "copy:token": "echo \"//registry.npmjs.org/:_authToken=${NPM_TOKEN}\" > ~/.npmrc",
     "copy:polyfills": "cp ./src/client/polyfills.js ./build/polyfills.js"
   },
   "repository": {
