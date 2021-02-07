@@ -4,7 +4,7 @@
   "description": "Core package for websites based on Cyberforce framework. Transforming ideas into reliable applications.",
   "main": "index.js",
   "scripts": {
-    "version": "./tools/version.sh patch",
+    "ver": "./tools/version.sh patch",
     "build": "npm run remove:build && npx tsc && npm run copy:polyfills",
     "linter": "npx tslint --project tslint.rules.json",
     "publish": "npm publish ./build --access public",
