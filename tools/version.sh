@@ -20,7 +20,6 @@ if [ "$1" == "major" ] || [ "$1" == "minor" ] || [ "$1" == "patch" ]; then
   echo "*  Version incrementation to $new ($1)"
   echo "* "
   vc=$(npm version $new)
-  cp package.json build/package.json
   echo "*  Success. File 'package.json' has been regenerated."
   echo "* "
   echo "* * * *"
