@@ -1,7 +1,7 @@
 {
   "name": "@cyberforce/essentials",
   "version": "0.0.19",
-  "description": "Core package for websites based on Cyberforce framework. Transforming ideas into reliable applications.",
+  "description": "Core package for websites based on Cyberforce framework. Transforming ideas into reliable applications",
   "main": "index.js",
   "scripts": {
     "ver": "./tools/version.sh patch",
