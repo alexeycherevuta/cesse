@@ -24,7 +24,8 @@
   "license": "ISC",
   "pre-commit": [
     "linter",
-    "test"
+    "test",
+    "ver"
   ],
   "devDependencies": {
     "@types/express": "^4.17.6",
