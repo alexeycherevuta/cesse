@@ -1,7 +1,7 @@
 import { observable, action, toJS } from 'mobx'
 import { computedFn } from 'mobx-utils'
 const Prismic = require('prismic-javascript')
-import { BaseStore } from '.'
+import BaseStore from '.'
 import RequestLifeCycles from '../../common/props/RequestLifeCycles'
 import PrismicProjectSchemas from '../../common/props/PrismicProjectSchemas'
 import { IKeyAny } from '../../common/intf/IKeyAny'

@@ -2,7 +2,6 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
-    "outDir": "./build",
     "target": "es2015",
     "lib": ["es2017", "dom"],
     "sourceMap": true,
@@ -25,10 +24,6 @@
     "skipLibCheck": true
   },
   "exclude": [
-    "node_modules",
-    "build",
-    "coverage",
-    "jest.config.js",
     "test"
   ]
 }

@@ -1,5 +1,5 @@
 import { observable, action } from 'mobx'
-import { BaseStore } from '.'
+import BaseStore from '.'
 import { IKeyAny } from '../../common/intf/IKeyAny'
 import Languages from '../../common/props/Languages'
 class LocalePlugin extends BaseStore {

@@ -1,6 +1,6 @@
 import { observable, action, computed, toJS } from 'mobx'
 
-import { BaseStore } from '.'
+import BaseStore from '.'
 import { IBaseRequest } from '../intf/IBase'
 import AgentHelper, { request } from '../../helpers/agent'
 import RequestLifeCycles from '../../props/RequestLifeCycles'

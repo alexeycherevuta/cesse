@@ -1,6 +1,7 @@
-import LocalePlugin from '../../src/client/plugins/locale'
-import Languages from '../../src/common/props/Languages'
-import { IKeyAny } from '../../src/common/intf/IKeyAny'
+import { Props, Client } from '../../..'
+import { IKeyAny } from '../../..'
+const Languages = Props.Languages
+const LocalePlugin = Client.Plugins.Locale
 const dummyA: IKeyAny = {
   foo: 'text',
   bar: 'sample',

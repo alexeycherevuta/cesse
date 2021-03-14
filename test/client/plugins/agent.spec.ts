@@ -1,10 +1,12 @@
 import axios, { AxiosResponse } from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import to from 'await-to-js'
-import AgentHelper, { request } from '../../src/client/helpers/agent'
-import { IBaseApiRoute } from '../../src/client/intf/IBase'
-import RequestMethods from '../../src/common/props/RequestMethods'
-import RequestLifeCycles from '../../src/common/props/RequestLifeCycles'
+import { Props, Client } from '../../..'
+import { IBaseApiRoute } from '../../..'
+const AgentHelper = Client.Helpers.Agent.default
+const request = Client.Helpers.Agent.request
+const RequestMethods = Props.RequestMethods
+const RequestLifeCycles = Props.RequestLifeCycles
 interface IMockedResponses {
   [slug: string]: AxiosResponse
 }
