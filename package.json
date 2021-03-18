@@ -3,6 +3,7 @@
   "version": "0.0.24",
   "description": "Core package for websites based on Cyberforce framework. Transforming ideas into reliable applications.",
   "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "ver": "./tools/version.sh patch",
     "build": "npm run remove:build && npx tsc && npm run copy:polyfills",
@@ -53,6 +54,7 @@
     "express": "^4.17.1",
     "express-static-gzip": "^2.0.6",
     "helmet": "^3.22.0",
+    "jest-serial-runner": "^1.1.0",
     "lodash": "^4.17.15",
     "mobx": "^5.15.4",
     "mobx-react": "^6.2.2",
