@@ -1,12 +1,12 @@
 {
   "name": "@cyberforce/essentials",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "Core package for websites based on Cyberforce framework. Transforming ideas into reliable applications.",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "ver": "./tools/version.sh patch",
     "build": "npm run remove:build && npx tsc && npm run copy:polyfills",
+    "version": "npm run build",
     "linter": "npx tslint --project tslint.rules.json",
     "deploy": "npm publish ./build --access public",
     "test": "npx jest",
