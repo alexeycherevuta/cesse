@@ -3,7 +3,7 @@
   "version": "0.0.26",
   "description": "Core package for websites based on Cyberforce framework. Transforming ideas into reliable applications.",
   "main": "index.js",
-  "types": "index.d.ts",
+  "typings": "index.d.ts",
   "scripts": {
     "build": "npm run remove:build && npx tsc && npm run copy:polyfills",
     "linter": "npx tslint --project tslint.rules.json",
