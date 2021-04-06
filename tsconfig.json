@@ -30,6 +30,7 @@
     "build",
     "coverage",
     "jest.config.js",
-    "test"
+    "test",
+    "test/**"
   ]
 }

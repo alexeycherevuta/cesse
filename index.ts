@@ -2,7 +2,8 @@ import BaseStoreClass from './src/client/plugins/index'
 import BucketPlugin from './src/client/plugins/bucket'
 import LocalePlugin from './src/client/plugins/locale'
 import PrismicPlugin from './src/client/plugins/prismic'
-import * as AgentHelper from './src/client/helpers/agent'
+import AgentHelper from './src/client/helpers/agent'
+import RequestHelper from './src/client/helpers/request'
 import * as PrismicToReactHelper from './src/client/helpers/prismicToReact'
 import BootstrapComponent from './src/client/bootstrap'
 import _Languages from './src/common/props/Languages'
@@ -26,6 +27,7 @@ export namespace Client {
   }
   export namespace Helpers {
     export const Agent = AgentHelper
+    export const Request = RequestHelper
     export const PrismicToReact = PrismicToReactHelper
   }
   export const Bootstrap = BootstrapComponent

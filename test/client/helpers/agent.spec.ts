@@ -3,10 +3,8 @@ import MockAdapter from 'axios-mock-adapter'
 import to from 'await-to-js'
 import { Props, Client } from '../../..'
 import { IBaseApiRoute } from '../../..'
-const AgentHelper = Client.Helpers.Agent.default
-const request = Client.Helpers.Agent.request
+const AgentHelper = Client.Helpers.Agent
 const RequestMethods = Props.RequestMethods
-const RequestLifeCycles = Props.RequestLifeCycles
 interface IMockedResponses {
   [slug: string]: AxiosResponse
 }
@@ -87,9 +85,9 @@ const mockResponses: IMockedResponses = {
     }
   }
 }
-describe('Plugin: Agent', () => {
+describe('Helper: Agent', () => {
   const mockAxios = new MockAdapter(axios)
-  it('initialises a plugin instance', () => {
+  it('initialises a helper instance', () => {
     expect(() => new AgentHelper(routes, {})).not.toThrow(Error)
   })
   describe('make request', () => {
@@ -165,105 +163,5 @@ describe('Plugin: Agent', () => {
     expect(res).toHaveProperty('config')
     expect(res?.config).toHaveProperty('baseURL')
     expect(res?.config.baseURL).toEqual(baseURL)
-  })
-  describe('Agent Request', () => {
-    it('set an idle request', () => {
-      const req = request(RequestLifeCycles.idle)
-      expect(req.lifeCycle).toEqual(RequestLifeCycles.idle)
-      expect(req.data).toEqual({})
-      expect(req.status).toBeNull()
-      expect(req.statusText).toBeNull()
-      expect(req.headers).toBeNull()
-    })
-    it('set a triggered request', () => {
-      const req = request(RequestLifeCycles.triggered)
-      expect(req).toEqual({
-        lifeCycle: RequestLifeCycles.triggered,
-        status: null,
-        statusText: null,
-        headers: null,
-        data: {}
-      })
-    })
-    it('set a completed request (success)', async () => {
-      const agent = new AgentHelper(routes, {})
-      const response = mockResponses.successWithPayload
-      mockAxios.onGet(routes[0].url).reply(200, response)
-      const [err, res] = await to(agent.make(routes[0].slug))
-      expect(res).toHaveProperty('status')
-      expect(res?.status).toEqual(200)
-      const req = request(RequestLifeCycles.completed, res)
-      expect(req).toEqual({
-        lifeCycle: RequestLifeCycles.completed,
-        status: 200,
-        statusText: 'success',
-        headers: response.headers,
-        data: response.data
-      })
-    })
-    it('set a completed request (error from the api)', async () => {
-      const agent = new AgentHelper(routes, {})
-      const response = mockResponses.error
-      mockAxios.onGet(routes[0].url).reply(200, response)
-      const [err, res] = await to(agent.make(routes[0].slug))
-      expect(res).toHaveProperty('status')
-      expect(res?.status).toEqual(200) 
-      const req = request(RequestLifeCycles.completed, res)
-      expect(req).toEqual({
-        lifeCycle: RequestLifeCycles.completed,
-        status: 500,
-        statusText: 'error',
-        headers: response.headers,
-        data: response.data
-      })
-    })
-    it('set a completed request (error from the network)', async () => {
-      let error
-      const agent = new AgentHelper(routes, {})
-      mockAxios.onGet(routes[0].url).networkError()
-      try {
-        await agent.make(routes[0].slug)
-      } catch (e) {
-        error = e
-      }
-      const req = request(RequestLifeCycles.completed, error)
-      expect(req).toEqual({
-        lifeCycle: RequestLifeCycles.completed,
-        status: 500,
-        statusText: 'error',
-        message: 'axios-error',
-        headers: null,
-        data: {
-          message: 'Network Error'
-        }
-      })
-    })
-    it('set a completed request, error with custom message', async () => {
-      const agent = new AgentHelper(routes, {})
-      const response = mockResponses.errorWithMessage
-      mockAxios.onGet(routes[0].url).reply(200, response)
-      const [err, res] = await to(agent.make(routes[0].slug))
-      expect(res).toHaveProperty('status')
-      expect(res?.status).toEqual(200)
-      const req = request(RequestLifeCycles.completed, res)
-      expect(req).toEqual({
-        lifeCycle: RequestLifeCycles.completed,
-        status: 401,
-        statusText: 'error',
-        headers: response.headers,
-        message: 'payload-incorrect',
-        data: response.data
-      })
-    })
-    it('set a processed request', () => {
-      const req = request(RequestLifeCycles.processed)
-      expect(req).toEqual({
-        lifeCycle: RequestLifeCycles.processed,
-        status: null,
-        statusText: null,
-        headers: null,
-        data: {}
-      })
-    })
   })
 })

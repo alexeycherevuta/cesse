@@ -6,13 +6,14 @@ module.exports = {
   reporters: [
     "default"
   ],
+  runner: 'jest-serial-runner',
   testEnvironment: "node",
   collectCoverage: true,
   collectCoverageFrom: ["src*.{js,jsx,ts}"],
-  testPathIgnorePatterns: ["src/config"],
+  testPathIgnorePatterns: [],
   coveragePathIgnorePatterns: [
-    "/node_modules",
-    "src/config",
+    "node_modules",
+    "build",
     "coverage",
     ".vscode",
   ],
