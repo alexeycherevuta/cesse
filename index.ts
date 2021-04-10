@@ -12,12 +12,10 @@ import _PrismicRichContent from './src/common/props/PrismicRichContent'
 import _PrismicSpans from './src/common/props/PrismicSpans'
 import _RequestLifeCycles from './src/common/props/RequestLifeCycles'
 import _RequestMethods from './src/common/props/RequestMethods'
-import webappServer from './src/server/webapp'
 export { IKeyAny } from './src/common/intf/IKeyAny'
 export { IKeyString } from './src/common/intf/IKeyString'
 export { IBaseAppConfig, IBaseAppProps, IBaseRequest, IBaseAppRoute, IBaseApiRoute } from './src/client/intf/IBase'
 export { IBaseAppStores } from './src/client/intf/IGeneric'
-export { IWebServer, IWebServerStaticRoute, IWebServerApiRoute } from './src/server/intf/IServer'
 export namespace Client {
   export namespace Plugins {
     export const Base = BaseStoreClass
@@ -33,7 +31,6 @@ export namespace Client {
   export const Bootstrap = BootstrapComponent
 }
 export namespace Server {
-  export const webapp = webappServer
 }
 export namespace Props {
   export const Languages = _Languages
