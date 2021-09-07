@@ -36,6 +36,7 @@
     "@types/uuid": "^7.0.3",
     "await-to-js": "^2.1.1",
     "axios-mock-adapter": "^1.18.1",
+    "jest-serial-runner": "^1.1.0",
     "jest": "^25.5.3",
     "path": "^0.12.7",
     "pre-commit": "^1.2.2",
@@ -49,7 +50,6 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "jest-serial-runner": "^1.1.0",
     "lodash": "^4.17.15",
     "mobx": "^5.15.4",
     "mobx-react": "^6.2.2",
