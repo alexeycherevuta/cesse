@@ -23,24 +23,219 @@ describe('Helper: Prismic (parser)', () => {
       expect(comp).toBeDefined()
       expect(comp).toEqual({
         label: 'website_name',
-        component: 'htmlInlineComponent',
+        component: 'htmlTextComponent',
         slice: null,
         body: { tag: 'h1', spans: [] }
       })
     })
     it('returns a static component from slice', () => {
-      const comp = prismic.getStaticComponentFromSlice('spa_master', 'header', 'header_logo')
+      const comp = prismic.getStaticComponentFromSlice('spa_master', 'masthead', 'rich_example')
       expect(comp).toBeDefined()
       expect(comp).toEqual({
-        label: 'header_logo',
-        component: 'imageComponent',
-        slice: 'header',
-        body: {
-          src: 'https:
-          alt: '',
-          dimensions: { width: 1018, height: 76 },
-          copyright: undefined
+        label: 'rich_example',
+        slice: 'masthead',
+        component: 'complexComponent',
+        body: [{
+          label: 'rich_example_0',
+          slice: 'masthead',
+          body: {
+            tag: 'p',
+            spans: [
+              {
+                start: 256,
+                end: 322,
+                type: 'strong'
+              },
+              {
+                start: 338,
+                end: 367,
+                type: 'em'
+              },
+              {
+                start: 520,
+                end: 545,
+                type: 'hyperlink',
+                data: {
+                  link_type: 'Web',
+                  url: 'https:
+                }
+              },
+              {
+                start: 565,
+                end: 584,
+                type: 'hyperlink',
+                data: {
+                  link_type: 'Web',
+                  url: 'https:
+                }
+              }
+            ]
+          },
+          component: 'htmlTextComponent'
+        },
+        {
+          label: 'rich_example_1',
+          slice: 'masthead',
+          body: {
+            tag: 'p',
+            spans: [
+            ]
+          },
+          component: 'htmlTextComponent'
+        },
+        {
+          label: 'rich_example_2',
+          slice: 'masthead',
+          body: {
+            tag: 'p',
+            spans: [
+            ]
+          },
+          component: 'htmlTextComponent'
+        },
+        {
+          label: 'rich_example_3',
+          slice: 'masthead',
+          body: null,
+          component: null
+        },
+        {
+          label: 'rich_example_4',
+          slice: 'masthead',
+          body: null,
+          component: null
+        },
+        {
+          label: 'rich_example_5',
+          slice: 'masthead',
+          body: null,
+          component: null
+        },
+        {
+          label: 'rich_example_6',
+          slice: 'masthead',
+          body: {
+            tag: 'p',
+            spans: [
+              {
+                start: 131,
+                end: 151,
+                type: 'hyperlink',
+                data: {
+                  link_type: 'Media',
+                  name: 'example.jpg',
+                  kind: 'image',
+                  url: 'https:
+                  size: '115450',
+                  height: '400',
+                  width: '400'
+                }
+              }
+            ]
+          },
+          component: 'htmlTextComponent'
+        },
+        {
+          label: 'rich_example_7',
+          slice: 'masthead',
+          body: {
+            tag: 'p',
+            spans: []
+          },
+          component: 'htmlTextComponent'
+        },
+        {
+          label: 'rich_example_8',
+          slice: 'masthead',
+          body: {
+            tag: 'ul',
+            spans: []
+          },
+          component: 'htmlTextComponent'
+        },
+        {
+          label: 'rich_example_9',
+          slice: 'masthead',
+          body: {
+            tag: 'ul',
+            spans: []
+          },
+          component: 'htmlTextComponent'
+        },
+        {
+          label: 'rich_example_10',
+          slice: 'masthead',
+          body: {
+            tag: 'ul',
+            spans: []
+          },
+          component: 'htmlTextComponent'
+        },
+        {
+          label: 'rich_example_11',
+          slice: 'masthead',
+          body: {
+            tag: 'p',
+            spans: []
+          },
+          component: 'htmlTextComponent'
+        },
+        {
+          label: 'rich_example_12',
+          slice: 'masthead',
+          body: {
+            tag: 'h3',
+            spans: []
+          },
+          component: 'htmlTextComponent'
+        },
+        {
+          label: 'rich_example_13',
+          slice: 'masthead',
+          body: {
+            src: 'https:
+            alt: '',
+            dimensions: {
+              width: 400,
+              height: 400
+            }
+          },
+          component: 'imageComponent'
+        },
+        {
+          label: 'rich_example_14',
+          slice: 'masthead',
+          body: {
+            tag: 'p',
+            spans: [
+              {
+                start: 167,
+                end: 183,
+                type: 'strong'
+              }
+            ]
+          },
+          component: 'htmlTextComponent'
+        },
+        {
+          label: 'rich_example_15',
+          slice: 'masthead',
+          body: {
+            tag: 'h2',
+            spans: []
+          },
+          component: 'htmlTextComponent'
+        },
+        {
+          label: 'rich_example_16',
+          slice: 'masthead',
+          body: {
+            tag: 'p',
+            spans: []
+          },
+          component: 'htmlTextComponent'
         }
+        ]
       })
     })
     it('gets a slice from layout with static component', () => {
@@ -61,7 +256,7 @@ describe('Helper: Prismic (parser)', () => {
             }
           }
         ],
-        repeatable: [ [] ]
+        repeatable: [[]]
       })
     })
     it('returns `null` if a slice is not found', () => {
@@ -81,7 +276,7 @@ describe('Helper: Prismic (parser)', () => {
         static: [
           {
             label: 'section_title',
-            component: 'htmlInlineComponent',
+            component: 'htmlTextComponent',
             slice: 'section_3',
             body: {
               tag: 'h2',
@@ -98,6 +293,7 @@ describe('Helper: Prismic (parser)', () => {
               body: {
                 src: 'https:
                 alt: '',
+                copyright: undefined,
                 dimensions: {
                   width: 400,
                   height: 400
@@ -121,6 +317,7 @@ describe('Helper: Prismic (parser)', () => {
               body: {
                 src: 'https:
                 alt: '',
+                copyright: undefined,
                 dimensions: {
                   width: 400,
                   height: 400
@@ -144,6 +341,7 @@ describe('Helper: Prismic (parser)', () => {
               body: {
                 src: 'https:
                 alt: '',
+                copyright: undefined,
                 dimensions: {
                   width: 400,
                   height: 400
@@ -167,6 +365,7 @@ describe('Helper: Prismic (parser)', () => {
               body: {
                 src: 'https:
                 alt: '',
+                copyright: undefined,
                 dimensions: {
                   width: 400,
                   height: 400
@@ -190,6 +389,7 @@ describe('Helper: Prismic (parser)', () => {
               body: {
                 src: 'https:
                 alt: '',
+                copyright: undefined,
                 dimensions: {
                   width: 400,
                   height: 400
@@ -213,6 +413,7 @@ describe('Helper: Prismic (parser)', () => {
               body: {
                 src: 'https:
                 alt: '',
+                copyright: undefined,
                 dimensions: {
                   width: 400,
                   height: 400
@@ -236,6 +437,7 @@ describe('Helper: Prismic (parser)', () => {
               body: {
                 src: 'https:
                 alt: '',
+                copyright: undefined,
                 dimensions: {
                   width: 400,
                   height: 400
@@ -259,6 +461,7 @@ describe('Helper: Prismic (parser)', () => {
               body: {
                 src: 'https:
                 alt: '',
+                copyright: undefined,
                 dimensions: {
                   width: 400,
                   height: 400
@@ -288,7 +491,7 @@ describe('Helper: Prismic (parser)', () => {
           type: 'testrepeatabletype',
           components: [
             {
-              component: 'htmlInlineComponent',
+              component: 'htmlTextComponent',
               label: 'title',
               slice: null,
               body: {
@@ -297,7 +500,7 @@ describe('Helper: Prismic (parser)', () => {
               }
             },
             {
-              component: 'htmlInlineComponent',
+              component: 'htmlTextComponent',
               label: 'subtitle',
               slice: null,
               body: {
@@ -316,7 +519,7 @@ describe('Helper: Prismic (parser)', () => {
           type: 'testrepeatabletype',
           components: [
             {
-              component: 'htmlInlineComponent',
+              component: 'htmlTextComponent',
               label: 'title',
               slice: null,
               body: {

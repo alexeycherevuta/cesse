@@ -1,4 +1,5 @@
 import { IKeyAny } from './IKeyAny'
+import PrismicComponents from '../props/PrismicComponents'
 export interface IPrismicContentType {
   id: string
   type: string
@@ -12,7 +13,7 @@ export interface IPrismicComponent {
   label: string
   component: string | null
   slice: string | null
-  body: IKeyAny | null
+  body: IKeyAny | IPrismicComponent[] | null
 }
 export interface IPrismicSlices {
   [slice: string]: IPrismicSlice

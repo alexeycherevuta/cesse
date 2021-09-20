@@ -3,6 +3,8 @@ import * as _ from 'lodash'
 import PrismicSpans from '../../common/props/PrismicSpans'
 import { renderToString } from 'react-dom/server'
 import PrismicRichContent from '../../common/props/PrismicRichContent'
+import { IPrismicComponent } from '../../common/intf/IPrismicHelper'
+import PrismicComponents from '../../common/props/PrismicComponents'
 interface IPrismicSimpleText {
   slice: string
   text: string
@@ -40,6 +42,39 @@ interface IPrismicImage {
 const Loading = (): JSX.Element => {
   return <div className="prismic--loading"><span /></div>
 }
+interface IPrismicRenderProps {
+  component: IPrismicComponent | undefined
+}
+export const PrismicComponent = (props: IPrismicRenderProps): JSX.Element => {
+  const { component } = props
+  if (!component || !component.label) {
+    return <div>Component not defined</div>
+  }
+  switch (component.component) {
+    case PrismicComponents.HtmlTextComponent: {
+      return <div>inline</div>
+    }
+    case PrismicComponents.HyperlinkComponent: {
+      return <div>hyperlink</div>
+    }
+    case PrismicComponents.ImageComponent: {
+      return <div>image</div>
+    }
+    case PrismicComponents.TextComponent: {
+      return <div>text</div>
+    }
+    default: {
+      return <div>unknown</div>
+    }
+  }
+}
+export const PrismicInline = (props: IPrismicRichText | {}): JSX.Element => {
+  if (_.isEmpty(props)) {
+    return <Loading />
+  }
+  const _props = props as IPrismicRichText
+  return <div className="prismic--text prismic--rich-text" dangerouslySetInnerHTML={createMarkup(resolveRichItems(_props.items))} />
+}
 export const PrismicImage = (props: IPrismicImage | {}): JSX.Element => {
   if (_.isEmpty(props)) {
     return <Loading />
@@ -53,13 +88,6 @@ export const PrismicText = (props: IPrismicSimpleText | {}): JSX.Element => {
   }
   const _props = props as IPrismicSimpleText
   return <div className="prismic--text" dangerouslySetInnerHTML={createMarkup(resolveSpans(_props.text, _props.spans))} />
-}
-export const PrismicRichText = (props: IPrismicRichText | {}): JSX.Element => {
-  if (_.isEmpty(props)) {
-    return <Loading />
-  }
-  const _props = props as IPrismicRichText
-  return <div className="prismic--text prismic--rich-text" dangerouslySetInnerHTML={createMarkup(resolveRichItems(_props.items))} />
 }
 const resolveRichItems = (items: IPrismicRichTextItem[]): any => {
   let html: string = ''

@@ -100,7 +100,214 @@ export const prismicQueryResponse = (): IKeyAny => {
                 }
               ],
               primary: {
-              }
+                masthead_title: [
+                  {
+                     type: 'heading2',
+                     text: 'Masthead title is great and will be improved',
+                     spans: [
+                        {
+                           start: 9,
+                           end: 14,
+                           type: 'strong'
+                        },
+                        {
+                           start: 18,
+                           end: 23,
+                           type: 'strong'
+                        }
+                     ]
+                  },
+                ],
+                rich_example: [
+                  {
+                    type: 'paragraph',
+                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eu finibus nibh. Nullam sagittis nulla odio, vitae lobortis lorem lacinia vel. Nam ac dui vitae ligula malesuada sollicitudin. Duis urna neque, accumsan vel est nec, rhoncus efficitur libero. Cras at venenatis nisi. Sed ornare ipsum a sem tristique tristique. Cras blandit scelerisque magna nec pharetra. Aenean augue nisl, porttitor a sem finibus, posuere mattis leo. Pellentesque ultricies dapibus porta. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse blandit, metus sit amet malesuada placerat, dui elit rhoncus nibh, vel pellentesque nisi eros eget tellus.',
+                    spans: [
+                       {
+                          start: 256,
+                          end: 322,
+                          type: 'strong'
+                       },
+                       {
+                          start: 338,
+                          end: 367,
+                          type: 'em'
+                       },
+                       {
+                          start: 520,
+                          end: 545,
+                          type: 'hyperlink',
+                          data: {
+                             link_type: 'Web',
+                             url: 'https:
+                          }
+                       },
+                       {
+                          start: 565,
+                          end: 584,
+                          type: 'hyperlink',
+                          data: {
+                             link_type: 'Web',
+                             url: 'https:
+                          }
+                       }
+                    ]
+                 },
+                 {
+                    type: 'paragraph',
+                    text: 'Vestibulum congue risus sed lorem scelerisque mattis. In dictum commodo augue, id eleifend nulla. Nulla facilisi. Phasellus nec lacinia tortor, sed cursus lectus. ',
+                    spans: [
+                    ]
+                 },
+                 {
+                    type: 'paragraph',
+                    text: 'Nunc hendrerit nibh a dolor tincidunt,',
+                    spans: [
+                    ]
+                 },
+                 {
+                    type: 'o-list-item',
+                    text: 'num 1 volutpat vehicula',
+                    spans: [
+                    ]
+                 },
+                 {
+                    type: 'o-list-item',
+                    text: 'num 2 felis posuere.',
+                    spans: [
+                       {
+                          start: 5,
+                          end: 19,
+                          type: 'strong'
+                       }
+                    ]
+                 },
+                 {
+                    type: 'o-list-item',
+                    text: 'num 3 super nice',
+                    spans: [
+                    ]
+                 },
+                 {
+                    type: 'paragraph',
+                    text: 'Vivamus nec tempor ipsum, ac luctus risus. Sed congue, augue mattis ultrices consequat, risus erat suscipit enim, elementum mollis nisl velit eget nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce sit amet sapien ac velit accumsan facilisis non nec tellus.',
+                    spans: [
+                       {
+                          start: 131,
+                          end: 151,
+                          type: 'hyperlink',
+                          data: {
+                             link_type: 'Media',
+                             name: 'example.jpg',
+                             kind: 'image',
+                             url: 'https:
+                             size: '115450',
+                             height: '400',
+                             width: '400'
+                          }
+                       }
+                    ]
+                 },
+                 {
+                    type: 'paragraph',
+                    text: 'Other list:',
+                    spans: [
+                    ]
+                 },
+                 {
+                    type: 'list-item',
+                    text: 'element 1',
+                    spans: [
+                    ]
+                 },
+                 {
+                    type: 'list-item',
+                    text: 'element 2',
+                    spans: [
+                    ]
+                 },
+                 {
+                    type: 'list-item',
+                    text: 'element 3',
+                    spans: [
+                    ]
+                 },
+                 {
+                    type: 'paragraph',
+                    text: 'Curabitur quis rutrum tortor, eget ornare ante. Aenean congue molestie ullamcorper. Nullam ut ante ac leo ornare finibus sit amet eu ipsum. Integer eu semper est.',
+                    spans: [
+                    ]
+                 },
+                 {
+                    type: 'heading3',
+                    text: 'Nice title heading',
+                    spans: [
+                    ]
+                 },
+                 {
+                    type: 'image',
+                    url: 'https:
+                    alt: null,
+                    copyright: null,
+                    dimensions: {
+                       width: 400,
+                       height: 400
+                    }
+                 },
+                 {
+                    type: 'paragraph',
+                    text: ' Proin pharetra dui sit amet efficitur laoreet. Praesent augue velit, commodo vel suscipit placerat, commodo et leo. Suspendisse lacinia nec dolor facilisis elementum. Nulla facilisi. Quisque tincidunt dui eros, dapibus vehicula nulla egestas a. Suspendisse potenti. Donec sed ipsum risus. Nam tincidunt tortor orci, ac elementum nulla tincidunt a. ',
+                    spans: [
+                       {
+                          start: 167,
+                          end: 183,
+                          type: 'strong'
+                       }
+                    ]
+                 },
+                 {
+                    type: 'heading2',
+                    text: 'Another bigger heading',
+                    spans: [
+                    ]
+                 },
+                 {
+                    type: 'paragraph',
+                    text: 'Phasellus elementum massa lorem, vitae facilisis quam congue in. Nam condimentum lobortis odio sit amet sollicitudin.',
+                    spans: [
+                    ]
+                 }
+                ]
+              },
+               masthead_content: [
+                  {
+                     type: 'paragraph',
+                     text: 'This is some content.',
+                     spans: [
+                     ]
+                  },
+                  {
+                     type: 'list-item',
+                     text: 'with list item 1',
+                     spans: [
+                     ]
+                  },
+                  {
+                     type: 'list-item',
+                     text: 'and list item 2',
+                     spans: [
+                     ]
+                  }
+               ],
+               masthead_image: {
+                  dimensions: {
+                     width: 400,
+                     height: 400
+                  },
+                  alt: null,
+                  copyright: null,
+                  url: 'https:
+               }
             },
             {
               slice_type: 'body_section_1',

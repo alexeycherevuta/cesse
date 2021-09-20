@@ -1,6 +1,7 @@
 import * as _ from 'lodash'
 import { IKeyAny } from '../intf/IKeyAny'
 import { IPrismicContentType, IPrismicSlice, IPrismicComponent, IPrismicSlices, IPrismicComponentConverter } from '../intf/IPrismicHelper'
+import PrismicComponents from '../props/PrismicComponents'
 interface IPrismicHelper {
   defineLayoutNamesPatterns(names: string[]): void
   defineComponentConverters(converters: IPrismicComponentConverter[]): void
@@ -23,19 +24,19 @@ export default class PrismicHelper implements IPrismicHelper {
   private layouts: string[] = ['master', 'layout']
   private converters: IPrismicComponentConverter[] = [
     {
-      component: 'htmlInlineComponent',
+      component: PrismicComponents.HtmlTextComponent,
       convert: toInlineComponent
     },
     {
-      component: 'textComponent',
+      component: PrismicComponents.TextComponent,
       convert: toTextComponent
     },
     {
-      component: 'imageComponent',
+      component: PrismicComponents.ImageComponent,
       convert: toImageComponent
     },
     {
-      component: 'toHyperlinkComponent',
+      component: PrismicComponents.HyperlinkComponent,
       convert: toHyperlinkComponent
     }
   ]
@@ -112,7 +113,7 @@ export default class PrismicHelper implements IPrismicHelper {
     }
     const _components: IPrismicComponent[] = []
     keys.forEach((label: string) => {
-      _components.push(this.convertElementToComponent(label, data[label][0]))
+      _components.push(this.convertRawDataToComponent(label, data[label][0]))
     })
     return _components
   }
@@ -127,20 +128,14 @@ export default class PrismicHelper implements IPrismicHelper {
       }
       Object.keys(slice.primary).forEach((label: string) => {
         let data = slice.primary[label]
-        if (Array.isArray(data)) {
-          data = data[0]
-        }
-        newSlices[sliceName].static.push(this.convertElementToComponent(label, data, sliceName))
+        this.convertElementToComponent(newSlices[sliceName].static, data, sliceName, label)
       })
       if (!_.isEmpty(slice.items)) {
         slice.items.forEach((components: IKeyAny) => {
           const group: IPrismicComponent[] = []
           Object.keys(components).forEach((label: string) => {
             let data = components[label]
-            if (Array.isArray(data)) {
-              data = data[0]
-            }
-            group.push(this.convertElementToComponent(label, data, sliceName))
+            this.convertElementToComponent(group, data, sliceName, label)
           })
           newSlices[sliceName].repeatable.push(group)
         })
@@ -148,23 +143,45 @@ export default class PrismicHelper implements IPrismicHelper {
     })
     return newSlices
   }
-  private convertElementToComponent = (label: string, obj: IKeyAny, slice?: string, order?: number): IPrismicComponent => {
+  private convertElementToComponent = (arr: IPrismicComponent[], data: IKeyAny | any[], sliceName: string, label: string) => {
+    if (!Array.isArray(data)) {
+      arr.push(this.convertRawDataToComponent(label, data, sliceName))
+    } else if (Array.isArray(data) && data.length === 1) {
+      arr.push(this.convertRawDataToComponent(label, data[0], sliceName))
+    } else {
+      const subComponents: IPrismicComponent[] = []
+      data.forEach((item: IKeyAny, index: number) => subComponents.push({
+        label: `${label}_${index}`,
+        slice: sliceName,
+        ...this.identifyComponent(item)
+      }))
+      arr.push({
+        label,
+        slice: sliceName,
+        component: PrismicComponents.ComplexComponent,
+        body: subComponents
+      })
+    }
+  }
+  private convertRawDataToComponent = (label: string, raw: IKeyAny, slice?: string): IPrismicComponent => {
+    return {
+      label,
+      slice: slice || null,
+      ...this.identifyComponent(raw)
+    }
+  }
+  private identifyComponent = (raw: IKeyAny) => {
     let component: string | null = null
     let body: IKeyAny | null = null
     this.converters.forEach((converter: IPrismicComponentConverter) => {
       if (_.isNull(component)) {
-        body = converter.convert(obj)
+        body = converter.convert(raw)
         if (!_.isNull(body)) {
           component = converter.component
         }
       }
     })
-    return {
-      label,
-      component,
-      slice: slice || null,
-      body
-    }
+    return { body, component }
   }
 }
 const isQueryResponseValid = (r: any): boolean => {
@@ -184,11 +201,17 @@ const toInlineComponent = (el: any): IKeyAny | null => {
     heading3: 'h3',
     heading4: 'h4',
     heading5: 'h5',
-    heading6: 'h6'
+    heading6: 'h6',
+    paragraph: 'p',
+    o_list_item: 'ol',
+    list_item: 'ul'
   }
-  if (el && el.type && el.text && Array.isArray(el.spans) && Object.keys(nameToTag).includes(el.type)) {
+  const type = el && el.type
+    ? el.type.replace('-', '_')
+    : undefined
+  if (type && el.text && Array.isArray(el.spans) && Object.keys(nameToTag).includes(type)) {
     return {
-      tag: nameToTag[el.type],
+      tag: nameToTag[type],
       spans: el.spans
     }
   }
