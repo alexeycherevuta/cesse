@@ -1,6 +1,6 @@
 import * as _ from 'lodash'
 import { IKeyAny } from '../intf/IKeyAny'
-import { IPrismicContentType, IPrismicSlice, IPrismicComponent, IPrismicSlices, IPrismicComponentConverter } from '../intf/IPrismicHelper'
+import { IPrismicContentType, IPrismicSlice, IPrismicComponent, IPrismicSlices, IPrismicComponentConverter, IPrismicHtmlTextComponentBody, IPrismicTextComponentBody, IPrismicImageComponentBody, IPrismicHyperlinkComponentBody, IPrismicComplexComponentBody } from '../intf/IPrismicHelper'
 import PrismicComponents from '../props/PrismicComponents'
 interface IPrismicHelper {
   defineLayoutNamesPatterns(names: string[]): void
@@ -25,7 +25,7 @@ export default class PrismicHelper implements IPrismicHelper {
   private converters: IPrismicComponentConverter[] = [
     {
       component: PrismicComponents.HtmlTextComponent,
-      convert: toInlineComponent
+      convert: toHtmlTextComponent
     },
     {
       component: PrismicComponents.TextComponent,
@@ -149,12 +149,15 @@ export default class PrismicHelper implements IPrismicHelper {
     } else if (Array.isArray(data) && data.length === 1) {
       arr.push(this.convertRawDataToComponent(label, data[0], sliceName))
     } else {
-      const subComponents: IPrismicComponent[] = []
-      data.forEach((item: IKeyAny, index: number) => subComponents.push({
-        label: `${label}_${index}`,
-        slice: sliceName,
-        ...this.identifyComponent(item)
-      }))
+      const subComponents: IPrismicComplexComponentBody = []
+      data.forEach((item: IKeyAny, index: number) => {
+        const _label = `${label}_${index}`
+        subComponents.push({
+          label: _label,
+          slice: sliceName,
+          ...this.identifyComponent(_label, item)
+        })
+      })
       arr.push({
         label,
         slice: sliceName,
@@ -167,15 +170,15 @@ export default class PrismicHelper implements IPrismicHelper {
     return {
       label,
       slice: slice || null,
-      ...this.identifyComponent(raw)
+      ...this.identifyComponent(label, raw)
     }
   }
-  private identifyComponent = (raw: IKeyAny) => {
+  private identifyComponent = (label: string, raw: IKeyAny) => {
     let component: string | null = null
     let body: IKeyAny | null = null
     this.converters.forEach((converter: IPrismicComponentConverter) => {
       if (_.isNull(component)) {
-        body = converter.convert(raw)
+        body = converter.convert(label, raw)
         if (!_.isNull(body)) {
           component = converter.component
         }
@@ -194,7 +197,7 @@ const isQueryResponseValid = (r: any): boolean => {
   }
   return valid
 }
-const toInlineComponent = (el: any): IKeyAny | null => {
+const toHtmlTextComponent = (label: string, el: any): IPrismicHtmlTextComponentBody | null => {
   const nameToTag = {
     heading1: 'h1',
     heading2: 'h2',
@@ -207,25 +210,26 @@ const toInlineComponent = (el: any): IKeyAny | null => {
     list_item: 'ul'
   }
   const type = el && el.type
-    ? el.type.replace('-', '_')
+    ? el.type.replace(/-/g, '_')
     : undefined
   if (type && el.text && Array.isArray(el.spans) && Object.keys(nameToTag).includes(type)) {
     return {
       tag: nameToTag[type],
+      text: el.text,
       spans: el.spans
     }
   }
   return null
 }
-const toTextComponent = (el: any): IKeyAny | null => {
+const toTextComponent = (label: string, el: any): IPrismicTextComponentBody | null => {
   if (_.isString(el) || _.isNull(el)) {
     return {
-      text: el
+      text: el || ''
     }
   }
   return null
 }
-const toImageComponent = (el: any): IKeyAny | null => {
+const toImageComponent = (label: string, el: any): IPrismicImageComponentBody | null => {
   if (el && el.hasOwnProperty('dimensions') && el.hasOwnProperty('alt') && el.hasOwnProperty('url')) {
     return {
       src: el.url,
@@ -236,7 +240,7 @@ const toImageComponent = (el: any): IKeyAny | null => {
   }
   return null
 }
-const toHyperlinkComponent = (el: any): IKeyAny | null => {
+const toHyperlinkComponent = (label: string, el: any): IPrismicHyperlinkComponentBody | null => {
   if (el && el.hasOwnProperty('link_type') && el.hasOwnProperty('url')) {
     return {
       type: el.link_type.toLowerCase(),

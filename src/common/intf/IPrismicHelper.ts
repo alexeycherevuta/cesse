@@ -1,5 +1,5 @@
 import { IKeyAny } from './IKeyAny'
-import PrismicComponents from '../props/PrismicComponents'
+import PrismicSpans from '../props/PrismicSpans'
 export interface IPrismicContentType {
   id: string
   type: string
@@ -26,4 +26,37 @@ export interface IPrismicComponentConverter {
   component: string
   convert: PrismicComponentConverterFunction
 }
-export type PrismicComponentConverterFunction = (prismicElement: any) => IKeyAny | null
+interface IPrismicSpanHyperlink {
+  link_type: 'Web'
+  url: string
+}
+export interface IPrismicSpan {
+  start: number
+  end: number
+  type: PrismicSpans
+  data?: IPrismicSpanHyperlink
+}
+export type PrismicComponentConverterFunction = (label: string, prismicElement: any) => IKeyAny | null
+export interface IPrismicHtmlTextComponentBody {
+  tag: string
+  text: string
+  spans: IPrismicSpan[]
+}
+export type IPrismicComplexComponentBody = IPrismicComponent[]
+export interface IPrismicTextComponentBody {
+  text: string
+}
+export interface IPrismicImageComponentBody {
+  src: string
+  alt: string
+  dimensions: {
+    width: number
+    height: number
+  }
+  copyright: string | undefined
+}
+export interface IPrismicHyperlinkComponentBody {
+  type: string
+  href: string
+  target: string | undefined
+}

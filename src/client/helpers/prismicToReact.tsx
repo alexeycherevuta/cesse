@@ -3,7 +3,7 @@ import * as _ from 'lodash'
 import PrismicSpans from '../../common/props/PrismicSpans'
 import { renderToString } from 'react-dom/server'
 import PrismicRichContent from '../../common/props/PrismicRichContent'
-import { IPrismicComponent } from '../../common/intf/IPrismicHelper'
+import { IPrismicComponent, IPrismicHtmlTextComponentBody, IPrismicSpan } from '../../common/intf/IPrismicHelper'
 import PrismicComponents from '../../common/props/PrismicComponents'
 interface IPrismicSimpleText {
   slice: string
@@ -18,16 +18,6 @@ interface IPrismicRichTextItem {
   type: PrismicRichContent
   text: string
   spans: IPrismicSpan[]
-}
-interface IPrismicSpan {
-  start: number
-  end: number
-  type: PrismicSpans
-  data?: IPrismicSpanHyperlink
-}
-interface IPrismicSpanHyperlink {
-  link_type: 'Web'
-  url: string
 }
 interface IPrismicImage {
   slice: string
@@ -52,7 +42,7 @@ export const PrismicComponent = (props: IPrismicRenderProps): JSX.Element => {
   }
   switch (component.component) {
     case PrismicComponents.HtmlTextComponent: {
-      return <div>inline</div>
+      return renderHtmlTextComponent(component)
     }
     case PrismicComponents.HyperlinkComponent: {
       return <div>hyperlink</div>
@@ -67,6 +57,13 @@ export const PrismicComponent = (props: IPrismicRenderProps): JSX.Element => {
       return <div>unknown</div>
     }
   }
+}
+const renderHtmlTextComponent = (component: IPrismicComponent): JSX.Element => {
+  const body = component.body as IPrismicHtmlTextComponentBody
+  const text = resolveSpans(body.text, body.spans)
+  return React.createElement(body.tag, {
+    className: 'prismic--htmlText'
+  }, [])
 }
 export const PrismicInline = (props: IPrismicRichText | {}): JSX.Element => {
   if (_.isEmpty(props)) {
