@@ -25,6 +25,8 @@ describe('Helper: Prismic (parser)', () => {
         label: 'website_name',
         component: 'htmlTextComponent',
         slice: null,
+        firstOfKind: true,
+        lastOfKind: true,
         body: { tag: 'h1', spans: [], text: 'Accelerate Tutors' }
       })
     })
@@ -35,9 +37,13 @@ describe('Helper: Prismic (parser)', () => {
         label: 'rich_example',
         slice: 'masthead',
         component: 'complexComponent',
+        firstOfKind: true,
+        lastOfKind: true,
         body: [{
           label: 'rich_example_0',
           slice: 'masthead',
+          firstOfKind: true,
+          lastOfKind: false,
           body: {
             tag: 'p',
             text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eu finibus nibh. Nullam sagittis nulla odio, vitae lobortis lorem lacinia vel. Nam ac dui vitae ligula malesuada sollicitudin. Duis urna neque, accumsan vel est nec, rhoncus efficitur libero. Cras at venenatis nisi. Sed ornare ipsum a sem tristique tristique. Cras blandit scelerisque magna nec pharetra. Aenean augue nisl, porttitor a sem finibus, posuere mattis leo. Pellentesque ultricies dapibus porta. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse blandit, metus sit amet malesuada placerat, dui elit rhoncus nibh, vel pellentesque nisi eros eget tellus.',
@@ -77,6 +83,8 @@ describe('Helper: Prismic (parser)', () => {
         {
           label: 'rich_example_1',
           slice: 'masthead',
+          firstOfKind: false,
+          lastOfKind: false,
           body: {
             tag: 'p',
             text: 'Vestibulum congue risus sed lorem scelerisque mattis. In dictum commodo augue, id eleifend nulla. Nulla facilisi. Phasellus nec lacinia tortor, sed cursus lectus. ',
@@ -87,6 +95,8 @@ describe('Helper: Prismic (parser)', () => {
         {
           label: 'rich_example_2',
           slice: 'masthead',
+          firstOfKind: false,
+          lastOfKind: true,
           body: {
             tag: 'p',
             text: 'Nunc hendrerit nibh a dolor tincidunt,',
@@ -97,6 +107,8 @@ describe('Helper: Prismic (parser)', () => {
         {
           label: 'rich_example_3',
           slice: 'masthead',
+          firstOfKind: true,
+          lastOfKind: false,
           body: {
             tag: 'ol',
             text: 'num 1 volutpat vehicula',
@@ -107,6 +119,8 @@ describe('Helper: Prismic (parser)', () => {
         {
           label: 'rich_example_4',
           slice: 'masthead',
+          firstOfKind: false,
+          lastOfKind: false,
           body: {
             tag: 'ol',
             text: 'num 2 felis posuere.',
@@ -123,6 +137,8 @@ describe('Helper: Prismic (parser)', () => {
         {
           label: 'rich_example_5',
           slice: 'masthead',
+          firstOfKind: false,
+          lastOfKind: true,
           body: {
             tag: 'ol',
             text: 'num 3 super nice',
@@ -133,6 +149,8 @@ describe('Helper: Prismic (parser)', () => {
         {
           label: 'rich_example_6',
           slice: 'masthead',
+          firstOfKind: true,
+          lastOfKind: false,
           body: {
             tag: 'p',
             text: 'Vivamus nec tempor ipsum, ac luctus risus. Sed congue, augue mattis ultrices consequat, risus erat suscipit enim, elementum mollis nisl velit eget nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce sit amet sapien ac velit accumsan facilisis non nec tellus.',
@@ -158,6 +176,8 @@ describe('Helper: Prismic (parser)', () => {
         {
           label: 'rich_example_7',
           slice: 'masthead',
+          firstOfKind: false,
+          lastOfKind: true,
           body: {
             tag: 'p',
             text: 'Other list:',
@@ -168,6 +188,8 @@ describe('Helper: Prismic (parser)', () => {
         {
           label: 'rich_example_8',
           slice: 'masthead',
+          firstOfKind: true,
+          lastOfKind: false,
           body: {
             tag: 'ul',
             text: 'element 1',
@@ -178,6 +200,8 @@ describe('Helper: Prismic (parser)', () => {
         {
           label: 'rich_example_9',
           slice: 'masthead',
+          firstOfKind: false,
+          lastOfKind: false,
           body: {
             tag: 'ul',
             text: 'element 2',
@@ -188,6 +212,8 @@ describe('Helper: Prismic (parser)', () => {
         {
           label: 'rich_example_10',
           slice: 'masthead',
+          firstOfKind: false,
+          lastOfKind: true,
           body: {
             tag: 'ul',
             text: 'element 3',
@@ -198,6 +224,8 @@ describe('Helper: Prismic (parser)', () => {
         {
           label: 'rich_example_11',
           slice: 'masthead',
+          firstOfKind: true,
+          lastOfKind: true,
           body: {
             tag: 'p',
             text: 'Curabitur quis rutrum tortor, eget ornare ante. Aenean congue molestie ullamcorper. Nullam ut ante ac leo ornare finibus sit amet eu ipsum. Integer eu semper est.',
@@ -208,6 +236,8 @@ describe('Helper: Prismic (parser)', () => {
         {
           label: 'rich_example_12',
           slice: 'masthead',
+          firstOfKind: true,
+          lastOfKind: true,
           body: {
             tag: 'h3',
             text: 'Nice title heading',
@@ -218,6 +248,8 @@ describe('Helper: Prismic (parser)', () => {
         {
           label: 'rich_example_13',
           slice: 'masthead',
+          firstOfKind: true,
+          lastOfKind: true,
           body: {
             src: 'https:
             alt: '',
@@ -232,6 +264,8 @@ describe('Helper: Prismic (parser)', () => {
         {
           label: 'rich_example_14',
           slice: 'masthead',
+          firstOfKind: true,
+          lastOfKind: true,
           body: {
             tag: 'p',
             text: ' Proin pharetra dui sit amet efficitur laoreet. Praesent augue velit, commodo vel suscipit placerat, commodo et leo. Suspendisse lacinia nec dolor facilisis elementum. Nulla facilisi. Quisque tincidunt dui eros, dapibus vehicula nulla egestas a. Suspendisse potenti. Donec sed ipsum risus. Nam tincidunt tortor orci, ac elementum nulla tincidunt a. ',
@@ -248,6 +282,8 @@ describe('Helper: Prismic (parser)', () => {
         {
           label: 'rich_example_15',
           slice: 'masthead',
+          firstOfKind: true,
+          lastOfKind: true,
           body: {
             tag: 'h2',
             text: 'Another bigger heading',
@@ -258,6 +294,8 @@ describe('Helper: Prismic (parser)', () => {
         {
           label: 'rich_example_16',
           slice: 'masthead',
+          firstOfKind: true,
+          lastOfKind: true,
           body: {
             tag: 'p',
             text: 'Phasellus elementum massa lorem, vitae facilisis quam congue in. Nam condimentum lobortis odio sit amet sollicitudin.',
@@ -275,6 +313,8 @@ describe('Helper: Prismic (parser)', () => {
             label: 'header_logo',
             component: 'imageComponent',
             slice: 'header',
+            firstOfKind: true,
+            lastOfKind: true,
             body: {
               src: 'https:
               alt: '',
@@ -308,6 +348,8 @@ describe('Helper: Prismic (parser)', () => {
             label: 'section_title',
             component: 'htmlTextComponent',
             slice: 'section_3',
+            firstOfKind: true,
+            lastOfKind: true,
             body: {
               tag: 'h2',
               text: '1:few group sessions for',
@@ -321,6 +363,8 @@ describe('Helper: Prismic (parser)', () => {
               label: 'tile_picture',
               component: 'imageComponent',
               slice: 'section_3',
+              firstOfKind: true,
+              lastOfKind: true,
               body: {
                 src: 'https:
                 alt: '',
@@ -335,6 +379,8 @@ describe('Helper: Prismic (parser)', () => {
               label: 'tile_title',
               component: 'textComponent',
               slice: 'section_3',
+              firstOfKind: true,
+              lastOfKind: true,
               body: {
                 text: 'Reception Year 1-2'
               }
@@ -345,6 +391,8 @@ describe('Helper: Prismic (parser)', () => {
               label: 'tile_picture',
               component: 'imageComponent',
               slice: 'section_3',
+              firstOfKind: true,
+              lastOfKind: true,
               body: {
                 src: 'https:
                 alt: '',
@@ -359,6 +407,8 @@ describe('Helper: Prismic (parser)', () => {
               label: 'tile_title',
               component: 'textComponent',
               slice: 'section_3',
+              firstOfKind: true,
+              lastOfKind: true,
               body: {
                 text: 'Year 3-4'
               }
@@ -369,6 +419,8 @@ describe('Helper: Prismic (parser)', () => {
               label: 'tile_picture',
               component: 'imageComponent',
               slice: 'section_3',
+              firstOfKind: true,
+              lastOfKind: true,
               body: {
                 src: 'https:
                 alt: '',
@@ -383,6 +435,8 @@ describe('Helper: Prismic (parser)', () => {
               label: 'tile_title',
               component: 'textComponent',
               slice: 'section_3',
+              firstOfKind: true,
+              lastOfKind: true,
               body: {
                 text: 'Year 5-6'
               }
@@ -393,6 +447,8 @@ describe('Helper: Prismic (parser)', () => {
               label: 'tile_picture',
               component: 'imageComponent',
               slice: 'section_3',
+              firstOfKind: true,
+              lastOfKind: true,
               body: {
                 src: 'https:
                 alt: '',
@@ -406,6 +462,8 @@ describe('Helper: Prismic (parser)', () => {
             {
               label: 'tile_title',
               component: 'textComponent',
+              firstOfKind: true,
+              lastOfKind: true,
               slice: 'section_3',
               body: {
                 text: 'Year 7-9'
@@ -417,6 +475,8 @@ describe('Helper: Prismic (parser)', () => {
               label: 'tile_picture',
               component: 'imageComponent',
               slice: 'section_3',
+              firstOfKind: true,
+              lastOfKind: true,
               body: {
                 src: 'https:
                 alt: '',
@@ -430,6 +490,8 @@ describe('Helper: Prismic (parser)', () => {
             {
               label: 'tile_title',
               component: 'textComponent',
+              firstOfKind: true,
+              lastOfKind: true,
               slice: 'section_3',
               body: {
                 text: 'GCSE'
@@ -440,6 +502,8 @@ describe('Helper: Prismic (parser)', () => {
             {
               label: 'tile_picture',
               component: 'imageComponent',
+              firstOfKind: true,
+              lastOfKind: true,
               slice: 'section_3',
               body: {
                 src: 'https:
@@ -454,6 +518,8 @@ describe('Helper: Prismic (parser)', () => {
             {
               label: 'tile_title',
               component: 'textComponent',
+              firstOfKind: true,
+              lastOfKind: true,
               slice: 'section_3',
               body: {
                 text: 'A-Level'
@@ -465,6 +531,8 @@ describe('Helper: Prismic (parser)', () => {
               label: 'tile_picture',
               component: 'imageComponent',
               slice: 'section_3',
+              firstOfKind: true,
+              lastOfKind: true,
               body: {
                 src: 'https:
                 alt: '',
@@ -479,6 +547,8 @@ describe('Helper: Prismic (parser)', () => {
               label: 'tile_title',
               component: 'textComponent',
               slice: 'section_3',
+              firstOfKind: true,
+              lastOfKind: true,
               body: {
                 text: 'Examps focused'
               }
@@ -489,6 +559,8 @@ describe('Helper: Prismic (parser)', () => {
               label: 'tile_picture',
               component: 'imageComponent',
               slice: 'section_3',
+              firstOfKind: true,
+              lastOfKind: true,
               body: {
                 src: 'https:
                 alt: '',
@@ -502,6 +574,8 @@ describe('Helper: Prismic (parser)', () => {
             {
               label: 'tile_title',
               component: 'textComponent',
+              firstOfKind: true,
+              lastOfKind: true,
               slice: 'section_3',
               body: {
                 text: 'Learn new skills'
@@ -525,6 +599,8 @@ describe('Helper: Prismic (parser)', () => {
               component: 'htmlTextComponent',
               label: 'title',
               slice: null,
+              firstOfKind: true,
+              lastOfKind: true,
               body: {
                 spans: [],
                 text: 'transname2',
@@ -535,6 +611,8 @@ describe('Helper: Prismic (parser)', () => {
               component: 'htmlTextComponent',
               label: 'subtitle',
               slice: null,
+              firstOfKind: true,
+              lastOfKind: true,
               body: {
                 spans: [],
                 text: 'transnamesdsddsds2',
@@ -555,6 +633,8 @@ describe('Helper: Prismic (parser)', () => {
               component: 'htmlTextComponent',
               label: 'title',
               slice: null,
+              firstOfKind: true,
+              lastOfKind: true,
               body: {
                 spans: [],
                 text: 'transname1',

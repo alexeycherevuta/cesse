@@ -13,6 +13,8 @@ export interface IPrismicComponent {
   label: string
   component: string | null
   slice: string | null
+  firstOfKind: boolean
+  lastOfKind: boolean
   body: IKeyAny | IPrismicComponent[] | null
 }
 export interface IPrismicSlices {

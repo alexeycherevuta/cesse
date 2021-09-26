@@ -20,6 +20,10 @@ interface IKeyPrismicContentType {
 interface IPrismicPluginConstructor {
   prismicQueryResponse: any
 }
+interface IPrismicIdentifyComponent {
+  component: string | null
+  body: IKeyAny | null
+}
 export default class PrismicHelper implements IPrismicHelper {
   private layouts: string[] = ['master', 'layout']
   private converters: IPrismicComponentConverter[] = [
@@ -143,7 +147,7 @@ export default class PrismicHelper implements IPrismicHelper {
     })
     return newSlices
   }
-  private convertElementToComponent = (arr: IPrismicComponent[], data: IKeyAny | any[], sliceName: string, label: string) => {
+  private convertElementToComponent = (arr: IPrismicComponent[], data: IKeyAny | IKeyAny[], sliceName: string, label: string) => {
     if (!Array.isArray(data)) {
       arr.push(this.convertRawDataToComponent(label, data, sliceName))
     } else if (Array.isArray(data) && data.length === 1) {
@@ -152,16 +156,21 @@ export default class PrismicHelper implements IPrismicHelper {
       const subComponents: IPrismicComplexComponentBody = []
       data.forEach((item: IKeyAny, index: number) => {
         const _label = `${label}_${index}`
+        const current = this.identifyComponent(_label, item)
         subComponents.push({
           label: _label,
           slice: sliceName,
-          ...this.identifyComponent(_label, item)
+          firstOfKind: this.isFirstOfKind(current, index, data),
+          lastOfKind: this.isLastOfKind(current, index, data),
+          ...current
         })
       })
       arr.push({
         label,
         slice: sliceName,
         component: PrismicComponents.ComplexComponent,
+        firstOfKind: true,
+        lastOfKind: true,
         body: subComponents
       })
     }
@@ -170,10 +179,12 @@ export default class PrismicHelper implements IPrismicHelper {
     return {
       label,
       slice: slice || null,
+      firstOfKind: true,
+      lastOfKind: true,
       ...this.identifyComponent(label, raw)
     }
   }
-  private identifyComponent = (label: string, raw: IKeyAny) => {
+  private identifyComponent = (label: string, raw: IKeyAny): IPrismicIdentifyComponent => {
     let component: string | null = null
     let body: IKeyAny | null = null
     this.converters.forEach((converter: IPrismicComponentConverter) => {
@@ -185,6 +196,30 @@ export default class PrismicHelper implements IPrismicHelper {
       }
     })
     return { body, component }
+  }
+  private isFirstOfKind = (current: IPrismicIdentifyComponent, index: number, data: IKeyAny[]): boolean => {
+    let first: boolean = true
+    if (current.component && current.body && index - 1 >= 0) {
+      const prev = this.identifyComponent('x', data[index - 1])
+      if (
+        prev.component === current.component && prev.body
+        && prev.body.hasOwnProperty('tag') && current.body.hasOwnProperty('tag')
+        && prev.body.tag === current.body.tag
+      ) { first = false }
+    }
+    return first
+  }
+  private isLastOfKind = (current: IPrismicIdentifyComponent, index: number, data: IKeyAny[]): boolean => {
+    let last: boolean = true
+    if (current.component && current.body && index + 1 < data.length) {
+      const next = this.identifyComponent('x', data[index + 1])
+      if (
+        next.component === current.component && next.body
+        && next.body.hasOwnProperty('tag') && current.body.hasOwnProperty('tag')
+        && next.body.tag === current.body.tag
+      ) { last = false }
+    }
+    return last
   }
 }
 const isQueryResponseValid = (r: any): boolean => {
