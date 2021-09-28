@@ -1,14 +1,14 @@
 import * as _ from 'lodash'
 import { IKeyAny } from '../intf/IKeyAny'
-import { IPrismicContentType, IPrismicSlice, IPrismicComponent, IPrismicSlices, IPrismicComponentConverter, IPrismicHtmlTextComponentBody, IPrismicTextComponentBody, IPrismicImageComponentBody, IPrismicHyperlinkComponentBody, IPrismicComplexComponentBody } from '../intf/IPrismicHelper'
+import { IPrismicContentType, IPrismicSlice, IPrismicComponent, IPrismicSlices, IPrismicComponentConverter, IPrismicHtmlTextComponentBody, IPrismicTextComponentBody, IPrismicImageComponentBody, IPrismicHyperlinkComponentBody, IPrismicRichComponentBody } from '../intf/IPrismicHelper'
 import PrismicComponents from '../props/PrismicComponents'
 interface IPrismicHelper {
   defineLayoutNamesPatterns(names: string[]): void
   defineComponentConverters(converters: IPrismicComponentConverter[]): void
   getContentType(name: string): IPrismicContentType[] | null
   getSlice(layout: string, slice: string): IPrismicSlice | null
-  getStaticComponentFromLayout(layout: string, label: string): IPrismicComponent | undefined
-  getStaticComponentFromSlice(layout: string, slice: string, label: string): IPrismicComponent | undefined
+  getComponentFromSliceLayout(layout: string, label: string): IPrismicComponent | undefined
+  getComponentFromSlice(layout: string, slice: string, label: string): IPrismicComponent | undefined
   parse(): void
 }
 interface IKeyArray {
@@ -75,14 +75,14 @@ export default class PrismicHelper implements IPrismicHelper {
       ? ct[0].slices[slice]
       : null
   }
-  public getStaticComponentFromLayout(layout: string, label: string): IPrismicComponent | undefined {
+  public getComponentFromSliceLayout(layout: string, label: string): IPrismicComponent | undefined {
     const l = this.getContentType(layout)
     if (l) {
       return l[0].components.find((component: IPrismicComponent) => component.label === label)
     }
     return undefined
   }
-  public getStaticComponentFromSlice(layout: string, slice: string, label: string): IPrismicComponent | undefined {
+  public getComponentFromSlice(layout: string, slice: string, label: string): IPrismicComponent | undefined {
     const s = this.getSlice(layout, slice)
     if (s) {
       return s.static.find((component: IPrismicComponent) => component.label === label)
@@ -153,7 +153,7 @@ export default class PrismicHelper implements IPrismicHelper {
     } else if (Array.isArray(data) && data.length === 1) {
       arr.push(this.convertRawDataToComponent(label, data[0], sliceName))
     } else {
-      const subComponents: IPrismicComplexComponentBody = []
+      const subComponents: IPrismicRichComponentBody = []
       data.forEach((item: IKeyAny, index: number) => {
         const _label = `${label}_${index}`
         const current = this.identifyComponent(_label, item)
@@ -168,7 +168,7 @@ export default class PrismicHelper implements IPrismicHelper {
       arr.push({
         label,
         slice: sliceName,
-        component: PrismicComponents.ComplexComponent,
+        component: PrismicComponents.RichComponent,
         firstOfKind: true,
         lastOfKind: true,
         body: subComponents

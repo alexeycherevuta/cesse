@@ -44,7 +44,7 @@ export interface IPrismicHtmlTextComponentBody {
   text: string
   spans: IPrismicSpan[]
 }
-export type IPrismicComplexComponentBody = IPrismicComponent[]
+export type IPrismicRichComponentBody = IPrismicComponent[]
 export interface IPrismicTextComponentBody {
   text: string
 }

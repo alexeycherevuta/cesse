@@ -7,7 +7,7 @@ module.exports = {
     "default"
   ],
   runner: 'jest-serial-runner',
-  testEnvironment: "node",
+  testEnvironment: "jsdom",
   collectCoverage: true,
   collectCoverageFrom: ["src*.{js,jsx,ts}"],
   testPathIgnorePatterns: [],

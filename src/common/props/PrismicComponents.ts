@@ -1,6 +1,6 @@
 enum PrismicComponents {
   HtmlTextComponent = 'htmlTextComponent',
-  ComplexComponent = 'complexComponent',
+  RichComponent = 'richComponent',
   TextComponent = 'textComponent',
   ImageComponent = 'imageComponent',
   HyperlinkComponent = 'hyperlinkComponent'

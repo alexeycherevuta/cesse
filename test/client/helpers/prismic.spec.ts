@@ -19,7 +19,7 @@ describe('Helper: Prismic (parser)', () => {
       }
     })
     it('returns a static component from layout', () => {
-      const comp = prismic.getStaticComponentFromLayout('spa_master', 'website_name')
+      const comp = prismic.getComponentFromSliceLayout('spa_master', 'website_name')
       expect(comp).toBeDefined()
       expect(comp).toEqual({
         label: 'website_name',
@@ -31,12 +31,12 @@ describe('Helper: Prismic (parser)', () => {
       })
     })
     it('returns a static component from slice', () => {
-      const comp = prismic.getStaticComponentFromSlice('spa_master', 'masthead', 'rich_example')
+      const comp = prismic.getComponentFromSlice('spa_master', 'masthead', 'rich_example')
       expect(comp).toBeDefined()
       expect(comp).toEqual({
         label: 'rich_example',
         slice: 'masthead',
-        component: 'complexComponent',
+        component: 'richComponent',
         firstOfKind: true,
         lastOfKind: true,
         body: [{

@@ -8,7 +8,6 @@ import * as PrismicToReactHelper from './src/client/helpers/prismicToReact'
 import BootstrapComponent from './src/client/bootstrap'
 import PrismicHelper from './src/common/helpers/prismic'
 import _Languages from './src/common/props/Languages'
-import _PrismicRichContent from './src/common/props/PrismicRichContent'
 import _PrismicSpans from './src/common/props/PrismicSpans'
 import _RequestLifeCycles from './src/common/props/RequestLifeCycles'
 import _RequestMethods from './src/common/props/RequestMethods'
@@ -40,7 +39,6 @@ export namespace Server {
 }
 export namespace Props {
   export const Languages = _Languages
-  export const PrismicRichContent = _PrismicRichContent
   export const PrismicSpans = _PrismicSpans
   export const RequestLifeCycles = _RequestLifeCycles
   export const RequestMethods = _RequestMethods
