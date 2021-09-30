@@ -3,38 +3,47 @@ import * as _ from 'lodash'
 import { v4 as uuidv4 } from 'uuid'
 import { renderToString } from 'react-dom/server'
 import PrismicSpans from '../../common/props/PrismicSpans'
-import { IPrismicComponent, IPrismicHtmlTextComponentBody, IPrismicSpan, IPrismicImageComponentBody, IPrismicTextComponentBody } from '../../common/intf/IPrismicHelper'
+import { IPrismicComponent, IPrismicHtmlTextComponentBody, IPrismicSpan, IPrismicImageComponentBody, IPrismicTextComponentBody, IPrismicHyperlinkComponentBody } from '../../common/intf/IPrismicHelper'
 import PrismicComponents from '../../common/props/PrismicComponents'
-interface IPrismicRenderProps {
+interface IPrismicComponentProps {
   component: IPrismicComponent | undefined
 }
-export const PrismicComponent = ({ component }: IPrismicRenderProps): JSX.Element => {
-  if (!component || !component.label) {
-    return <div>Component not defined</div>
+interface IBasePrismicComponentProps {
+  component: IPrismicComponent
+}
+interface IPrismicHyperlinkComponentProps extends IBasePrismicComponentProps {
+  caption: string
+}
+export const PrismicComponent = ({ component }: IPrismicComponentProps): JSX.Element => {
+  if (!component || _.isNull(component.component) || !component.label) {
+    return <div>Error: component is `null`</div>
   }
   switch (component.component) {
     case PrismicComponents.RichComponent: {
-      return RichComponent({...component})
+      return RichComponent({component})
     }
     case PrismicComponents.HtmlTextComponent: {
-      return HtmlTextComponent({...component})
+      return HtmlTextComponent({component})
     }
     case PrismicComponents.HyperlinkComponent: {
-      return <div>hyperlink</div>
+      return HyperlinkComponent({
+        component,
+        caption: ''
+      })
     }
     case PrismicComponents.ImageComponent: {
-      return ImageComponent({...component})
+      return ImageComponent({component})
     }
     case PrismicComponents.TextComponent: {
-      return TextComponent({...component})
+      return TextComponent({component})
     }
     default: {
-      return <div>Component not found</div>
+      return <div>Error: component not recognised</div>
     }
   }
 }
-export const RichComponent = (props: IPrismicComponent): JSX.Element => {
-  const body = props.body as IPrismicComponent[]
+export const RichComponent = (props: IBasePrismicComponentProps): JSX.Element => {
+  const body = props.component.body as IPrismicComponent[]
   let subcomponents: JSX.Element[] = []
   let genre: JSX.Element[] = []
   body.forEach((sub: IPrismicComponent) => {
@@ -56,8 +65,8 @@ export const RichComponent = (props: IPrismicComponent): JSX.Element => {
     className: 'prismic--rich'
   }, subcomponents)
 }
-export const HtmlTextComponent = (props: IPrismicComponent): JSX.Element => {
-  const body = props.body as IPrismicHtmlTextComponentBody
+export const HtmlTextComponent = (props: IBasePrismicComponentProps): JSX.Element => {
+  const body = props.component.body as IPrismicHtmlTextComponentBody
   let { tag } = body
   if (tag === 'ul' || tag === 'ol') {
     tag = 'li'
@@ -65,13 +74,21 @@ export const HtmlTextComponent = (props: IPrismicComponent): JSX.Element => {
   return React.createElement(tag, { key: uuidv4() }, <span dangerouslySetInnerHTML={createMarkup(resolveSpans(body.text, body.spans))} />
   )
 }
-export const ImageComponent = (props: IPrismicComponent): JSX.Element => {
-  const body = props.body as IPrismicImageComponentBody
+export const ImageComponent = (props: IBasePrismicComponentProps): JSX.Element => {
+  const body = props.component.body as IPrismicImageComponentBody
   return <img key={ uuidv4() } className="prismic--image" src={body.src} alt={body.alt || ''} />
 }
-export const TextComponent = (props: IPrismicComponent): JSX.Element => {
-  const body = props.body as IPrismicTextComponentBody
+export const TextComponent = (props: IBasePrismicComponentProps): JSX.Element => {
+  const body = props.component.body as IPrismicTextComponentBody
   return <span key={ uuidv4() } className="prismic--text">{body.text}</span>
+}
+export const HyperlinkComponent = (props: IPrismicHyperlinkComponentProps): JSX.Element => {
+  const body = props.component.body as IPrismicHyperlinkComponentBody
+  const toId = body.href.indexOf('
+  const href = toId
+    ? body.href.split('
+    : body.href
+  return <a key={uuidv4()} href={href} className="prismic--link" target={body.target && !toId ? body.target : ''}>{props.caption}</a>
 }
 const resolveSpans = (text: string, spans: IPrismicSpan[]): string => {
   let _text = text
@@ -86,7 +103,7 @@ const resolveSpan = (text: string, fragment: string, span: IPrismicSpan): string
   switch (span.type) {
     case PrismicSpans.hyperlink: {
       if (span.data) {
-        const toId = span.data.url.indexOf('#') !== -1
+        const toId = span.data.url.indexOf('
         const url = toId
           ? span.data.url.split('
           : span.data.url
