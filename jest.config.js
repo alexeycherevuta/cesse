@@ -1,15 +1,18 @@
 module.exports = {
-  roots: ["./test"],
+  roots: ["."],
   transform: {
     "^.+\\.tsx?$": "ts-jest"
   },
+  testMatch: [
+    "<rootDir>/src*.test.ts"
+  ],
   reporters: [
     "default"
   ],
   runner: 'jest-serial-runner',
   testEnvironment: "jsdom",
-  collectCoverage: true,
-  collectCoverageFrom: ["src*.{js,jsx,ts}"],
+  collectCoverage: false,
+  collectCoverageFrom: ["src*.{jsx,ts}"],
   testPathIgnorePatterns: [],
   coveragePathIgnorePatterns: [
     "node_modules",
@@ -26,6 +29,6 @@ module.exports = {
     }
   },
   setupFilesAfterEnv: [
-    "<rootDir>/test/support/setupTests.ts"
+    "<rootDir>/src/setupTests.ts"
   ]
 }
