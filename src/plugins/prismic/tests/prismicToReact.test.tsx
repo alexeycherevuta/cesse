@@ -9,7 +9,7 @@ import { IPrismicHyperlinkComponentBody } from '../intf/IPrismicComponentBody'
 const debug = (e: any) => {
   console.log(e.debug())
 }
-describe('prismicToReact helper', () => {
+describe('Plugin: Prismic → React components', () => {
   const prismic = new PrismicParser({ prismicQueryResponse: prismicQueryResponse() })
   prismic.parse()
   it('render PrismicComponent returning `HtmlTextComponent`', () => {

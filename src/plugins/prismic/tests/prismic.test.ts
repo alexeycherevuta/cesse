@@ -1,6 +1,6 @@
 import { prismicQueryResponse } from '../factory'
 import PrismicParser from '../modules/parser'
-describe('Helper: Prismic (parser)', () => {
+describe('Plugin: Prismic → Parser', () => {
   describe('Default settings', () => {
     const prismic = new PrismicParser({ prismicQueryResponse: prismicQueryResponse() })
     prismic.parse()

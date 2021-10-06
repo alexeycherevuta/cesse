@@ -1,5 +1,5 @@
-import _Languages from '../common/props/Languages'
-import LocalePlugin from './plugins/locale'
+import _Languages from '../plugins/locale/props/Languages'
+import LocalePlugin from '../plugins/locale/modules/mobx'
 import PrismicPlugin from '../plugins/prismic/modules/mobx'
 export namespace CorePlugins {
   export const Locale = LocalePlugin
