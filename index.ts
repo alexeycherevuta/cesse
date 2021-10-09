@@ -1,7 +1,7 @@
 import * as PrismicPlugin from './src/plugins/prismic'
+import * as LocalePlugin from './src/plugins/locale'
 import BaseStoreClass from './src/client/plugins/index'
 import BucketPlugin from './src/client/plugins/bucket'
-import LocalePlugin from './src/plugins/locale/modules/mobx'
 import AgentHelper from './src/client/helpers/agent'
 import RequestHelper from './src/client/helpers/request'
 import * as PrismicToReactHelper from './src/plugins/prismic/modules/react'
@@ -15,6 +15,7 @@ export { IBaseAppConfig, IBaseAppProps, IBaseRequest, IBaseAppRoute, IBaseApiRou
 export { IBaseAppStores } from './src/client/intf/IGeneric'
 export namespace Plugins {
   export const Prismic = PrismicPlugin
+  export const Locale = LocalePlugin
 }
 export namespace Client {
   export namespace Pluginsx {

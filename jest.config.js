@@ -4,11 +4,13 @@ module.exports = {
     "^.+\\.tsx?$": "ts-jest"
   },
   testMatch: [
-    "<rootDir>/src*.test.ts"
+    "<rootDir>/src*.test.ts",
+    "<rootDir>/src*.test.tsx"
   ],
   reporters: [
     "default"
   ],
+  verbose: true,
   runner: 'jest-serial-runner',
   testEnvironment: "jsdom",
   collectCoverage: false,

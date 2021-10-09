@@ -1,7 +1,7 @@
 import { prismicQueryResponse } from '../factory'
 import PrismicParser from '../modules/parser'
 describe('Plugin: Prismic → Parser', () => {
-  describe('Default settings', () => {
+  describe('default settings', () => {
     const prismic = new PrismicParser({ prismicQueryResponse: prismicQueryResponse() })
     prismic.parse()
     it('throws an error if payload is incorrect', async () => {
@@ -645,7 +645,7 @@ describe('Plugin: Prismic → Parser', () => {
       ])
     })
   })
-  describe('User settings', () => {
+  describe('user settings', () => {
     it.skip('defines layout according to a user custom pattern', () => {
     })
     it.skip('defines and uses custom converter functions for user convenience', () => {
