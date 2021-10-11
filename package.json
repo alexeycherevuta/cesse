@@ -1,6 +1,6 @@
 {
   "name": "@cyberforce/essentials",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Core package for websites based on Cyberforce framework. Transforming ideas into reliable applications.",
   "main": "index.js",
   "typings": "index.d.ts",
@@ -14,7 +14,7 @@
     "test:watch": "npx jest --watchAll --runInBand",
     "remove:build": "npx rimraf ./build",
     "copy:token": "echo \"//registry.npmjs.org/:_authToken=${NPM_ACCESS_TOKEN}\" > .npmrc",
-    "copy:polyfills": "cp ./src/client/polyfills.js ./build/polyfills.js"
+    "copy:polyfills": "cp ./src/common/polyfills.js ./build/polyfills.js"
   },
   "repository": {
     "type": "git",

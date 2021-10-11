@@ -1,7 +1,6 @@
-import RequestLifeCycles from '../../common/props/RequestLifeCycles'
-import { IBaseRequest } from '../intf/IBase'
 import { AxiosResponse, AxiosError } from 'axios'
-const RequestHelper = (lifeCycle: RequestLifeCycles, r?: AxiosResponse | AxiosError): IBaseRequest => {
+import { IBaseRequest } from '../../../common/intf/IBaseRequest'
+const Request = (lifeCycle: string, r?: AxiosResponse | AxiosError): IBaseRequest => {
   let base: IBaseRequest = {
     lifeCycle,
     status: null,
@@ -36,4 +35,4 @@ const RequestHelper = (lifeCycle: RequestLifeCycles, r?: AxiosResponse | AxiosEr
   }
   return base
 }
-export default RequestHelper
+export default Request

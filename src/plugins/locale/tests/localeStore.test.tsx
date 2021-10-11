@@ -1,10 +1,9 @@
 import * as React from 'react'
-import { Provider, inject } from 'mobx-react'
+import { Provider, inject, observer } from 'mobx-react'
 import LocaleMobx from '../modules/mobx'
 import { mount } from 'enzyme'
 import Languages from '../props/Languages'
 import { IKeyAny } from '../../../common/intf/IKeyAny'
-import { observable } from 'mobx'
 const lang1: IKeyAny = {
   foo: 'text',
   bar: 'sample',
@@ -24,6 +23,7 @@ const Container = (props: any): JSX.Element => {
   const store = { locale }
   return <Provider {...store}>{props.children}</Provider>
 }
+@observer
 @inject('locale')
 class RenderTranslation extends React.Component<any, {}> {
   public render(): JSX.Element {
@@ -31,7 +31,7 @@ class RenderTranslation extends React.Component<any, {}> {
     return <div>{l.text('bar')}</div>
   }
 }
-@observable
+@observer
 @inject('locale')
 class SwitchTranslation extends React.Component<any, {}> {
   public componentDidMount(): void {
@@ -47,7 +47,7 @@ describe('Plugin: Locale → React component', () => {
     const comp = mount(<Container><RenderTranslation /></Container>)
     expect(comp.find('div').text()).toEqual(lang1.bar)
   })
-  it.skip('returns a correctly translated text based on a language set', () => {
+  it('returns a correctly translated text based on a language set', () => {
     const comp = mount(<Container><SwitchTranslation /></Container>)
     comp.update()
   })

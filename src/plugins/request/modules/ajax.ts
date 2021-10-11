@@ -1,22 +1,15 @@
-import RequestMethods from '../../common/props/RequestMethods'
-import { IBaseApiRoute } from '../intf/IBase'
-import { IKeyAny } from '../../common/intf/IKeyAny'
+import { IAjax, IAjaxOptions } from '../intf/IAjax'
+import { IKeyAny } from '../../../common/intf/IKeyAny'
+import { IBaseApiRoute } from '../../../common/intf/IBaseApiRoute'
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
-interface IAgentHelper {
-  make(routeSlug: string, options: IAgentHelperPrepareOptions): Promise<AxiosResponse>
-}
-interface IAgentHelperPrepareOptions {
-  token?: string
-  data?: any
-}
-export default class AgentHelper implements IAgentHelper {
+export default class Ajax implements IAjax {
   private routes: IBaseApiRoute[]
   private options: AxiosRequestConfig
   constructor(routes: IBaseApiRoute[], options: AxiosRequestConfig) {
     this.routes = routes
     this.options = options
   }
-  public async make(routeSlug: string, options: IAgentHelperPrepareOptions = {}): Promise<AxiosResponse> {
+  public async make(routeSlug: string, options: IAjaxOptions = {}): Promise<AxiosResponse> {
     const headers: IKeyAny = {}
     const axiosOptions = {...this.options}
     const route = this.routes.find((r: IBaseApiRoute) => r.slug === routeSlug)
@@ -34,11 +27,20 @@ export default class AgentHelper implements IAgentHelper {
     }
     const axiosInstance = axios.create(axiosOptions)
     switch (route.method) {
-      case RequestMethods.POST:
+      case 'post':
         return axiosInstance.post(route.url, options.data, { headers })
-      case RequestMethods.GET:
-      default:
+      case 'get':
         return axiosInstance.get(route.url, { headers })
+      case 'delete':
+        return axiosInstance.delete(route.url, { headers })
+      case 'put':
+        return axiosInstance.put(route.url, options.data, { headers })
+      case 'options':
+        return axiosInstance.options(route.url, { headers })
+      case 'patch':
+        return axiosInstance.patch(route.url, options.data, { headers })
+      default:
+        throw new Error('Unknown request method')
     }
   }
 }
