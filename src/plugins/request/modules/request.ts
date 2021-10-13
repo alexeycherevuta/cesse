@@ -1,6 +1,6 @@
 import { AxiosResponse, AxiosError } from 'axios'
 import { IBaseRequest } from '../../../common/intf/IBaseRequest'
-const Request = (lifeCycle: string, r?: AxiosResponse | AxiosError): IBaseRequest => {
+const request = (lifeCycle: string, r?: AxiosResponse | AxiosError): IBaseRequest => {
   let base: IBaseRequest = {
     lifeCycle,
     status: null,
@@ -35,4 +35,4 @@ const Request = (lifeCycle: string, r?: AxiosResponse | AxiosError): IBaseReques
   }
   return base
 }
-export default Request
+export default request

@@ -1,5 +1,5 @@
 import _Ajax from './modules/ajax'
-import Request from './modules/request'
+import request from './modules/request'
 export const Ajax = _Ajax
-export const state = Request
+export const state = request
 export { IAjax, IAjaxOptions } from './intf/IAjax'

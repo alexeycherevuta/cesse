@@ -1,12 +1,11 @@
 import axios, { AxiosResponse } from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import to from 'await-to-js'
-import { Props, Client } from '../../..'
-import { IBaseApiRoute } from '../../..'
-const AgentHelper = Client.Helpers.Agent
-const request = Client.Helpers.Request
-const RequestMethods = Props.RequestMethods
-const RequestLifeCycles = Props.RequestLifeCycles
+import { IBaseApiRoute } from '../../../common/intf/IBaseApiRoute'
+import RequestMethods from '../../../common/props/RequestMethods'
+import RequestLifeCycles from '../../../common/props/RequestLifeCycles'
+import request from '../modules/request'
+import Ajax from '../modules/ajax'
 interface IMockedResponses {
   [slug: string]: AxiosResponse
 }
@@ -87,7 +86,7 @@ const mockResponses: IMockedResponses = {
     }
   }
 }
-describe('Helper: Request', () => {
+describe('Plugin: Request → decorator (request)', () => {
   const mockAxios = new MockAdapter(axios)
   it('set an idle request', () => {
     const req = request(RequestLifeCycles.idle)
@@ -108,10 +107,10 @@ describe('Helper: Request', () => {
     })
   })
   it('set a completed request (success)', async () => {
-    const agent = new AgentHelper(routes, {})
+    const xhr = new Ajax(routes, {})
     const response = mockResponses.successWithPayload
     mockAxios.onGet(routes[0].url).reply(200, response)
-    const [err, res] = await to(agent.make(routes[0].slug))
+    const [err, res] = await to(xhr.make(routes[0].slug))
     expect(res).toHaveProperty('status')
     expect(res?.status).toEqual(200)
     const req = request(RequestLifeCycles.completed, res)
@@ -124,10 +123,10 @@ describe('Helper: Request', () => {
     })
   })
   it('set a completed request (error from the api)', async () => {
-    const agent = new AgentHelper(routes, {})
+    const xhr = new Ajax(routes, {})
     const response = mockResponses.error
     mockAxios.onGet(routes[0].url).reply(200, response)
-    const [err, res] = await to(agent.make(routes[0].slug))
+    const [err, res] = await to(xhr.make(routes[0].slug))
     expect(res).toHaveProperty('status')
     expect(res?.status).toEqual(200) 
     const req = request(RequestLifeCycles.completed, res)
@@ -141,10 +140,10 @@ describe('Helper: Request', () => {
   })
   it('set a completed request (error from the network)', async () => {
     let error
-    const agent = new AgentHelper(routes, {})
+    const xhr = new Ajax(routes, {})
     mockAxios.onGet(routes[0].url).networkError()
     try {
-      await agent.make(routes[0].slug)
+      await xhr.make(routes[0].slug)
     } catch (e) {
       error = e
     }
@@ -161,10 +160,10 @@ describe('Helper: Request', () => {
     })
   })
   it('set a completed request, error with custom message', async () => {
-    const agent = new AgentHelper(routes, {})
+    const xhr = new Ajax(routes, {})
     const response = mockResponses.errorWithMessage
     mockAxios.onGet(routes[0].url).reply(200, response)
-    const [err, res] = await to(agent.make(routes[0].slug))
+    const [err, res] = await to(xhr.make(routes[0].slug))
     expect(res).toHaveProperty('status')
     expect(res?.status).toEqual(200)
     const req = request(RequestLifeCycles.completed, res)
