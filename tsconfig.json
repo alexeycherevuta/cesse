@@ -31,7 +31,7 @@
     "build",
     "coverage",
     "jest.config.js",
-    "test",
-    "test/**"
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx"
   ]
 }
