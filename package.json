@@ -25,7 +25,7 @@
   "license": "ISC",
   "pre-commit": [
     "linter",
-    "test",
+    "test:coverage",
     "build"
   ],
   "devDependencies": {
