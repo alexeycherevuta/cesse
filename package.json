@@ -1,6 +1,6 @@
 {
   "name": "@cyberforce/essentials",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Core package for websites based on Cyberforce framework. Transforming ideas into reliable applications.",
   "main": "index.js",
   "typings": "index.d.ts",
@@ -9,10 +9,12 @@
     "linter": "npx tslint --project tslint.rules.json",
     "watch": "npx nodemon -e ts,tsx,js -w ./src -x npx tsc",
     "deploy": "npm publish ./build --access public",
+    "deploy:local": " npm version patch && npm run build && npm run copy:token && npm run copy:package && npm deploy",
     "test": "npx jest",
     "test:coverage": "npx jest --coverage",
     "test:watch": "npx jest --watchAll --runInBand",
     "remove:build": "npx rimraf ./build",
+    "copy:package": "cp package.json ./build/package.json",
     "copy:token": "echo \"//registry.npmjs.org/:_authToken=${NPM_ACCESS_TOKEN}\" > .npmrc",
     "copy:polyfills": "cp ./src/common/polyfills.js ./build/polyfills.js"
   },
