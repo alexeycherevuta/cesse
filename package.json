@@ -5,18 +5,20 @@
   "main": "index.js",
   "typings": "index.d.ts",
   "scripts": {
-    "build": "npm run remove:build && npx tsc && npm run copy:polyfills",
+    "build": "npm run build:remove && npx tsc && npm run copy:polyfills && npm run build:move",
+    "build:remove": "npx rimraf ./build",
+    "build:move": "cd ./build/src && mv * ../ && cd .. && npx rimraf ./src",
+    "build:deploy": "npm version patch && npm run build && npm run copy:token && npm run copy:package && npm run deploy",
     "linter": "npx tslint --project tslint.rules.json",
     "watch": "npx nodemon -e ts,tsx,js -w ./src -x npx tsc",
     "deploy": "npm publish ./build --access public",
-    "deploy:fast": " npm version patch && npm run build && npm run copy:token && npm run copy:package && npm run deploy",
     "test": "npx jest",
     "test:coverage": "npx jest --coverage",
     "test:watch": "npx jest --watchAll --runInBand",
-    "remove:build": "npx rimraf ./build",
+    "set:token": "echo \"//registry.npmjs.org/:_authToken=${NPM_ACCESS_TOKEN}\" > .npmrc",
     "copy:package": "cp package.json ./build/package.json",
-    "copy:token": "echo \"//registry.npmjs.org/:_authToken=${NPM_ACCESS_TOKEN}\" > .npmrc",
-    "copy:polyfills": "cp ./src/common/polyfills.js ./build/polyfills.js"
+    "copy:token": "cp ./.npmrc ./build/.npmrc",
+    "copy:polyfills": "cp ./src/common/polyfills.js ./build/src/polyfills.js"
   },
   "repository": {
     "type": "git",
