@@ -5,6 +5,8 @@ import { BaseMobxStore as _BaseMobxStore } from './common/_base'
 import BootstrapComponent from './common/bootstrap'
 import _RequestLifeCycles from './common/props/RequestLifeCycles'
 import _RequestMethods from './common/props/RequestMethods'
+import _LocaleMobxStore from './plugins/locale/modules/mobx'
+import _PrismicMobxStore from './plugins/prismic/modules/mobx'
 export { IKeyAny } from './common/intf/IKeyAny'
 export { IKeyString } from './common/intf/IKeyString'
 export { IBaseWebAppConfig } from './common/intf/IBaseWebAppConfig'
@@ -13,6 +15,8 @@ export { IBaseWebAppRoute } from './common/intf/IBaseWebAppRoute'
 export { IBaseApiRoute } from './common/intf/IBaseApiRoute'
 export { IBaseRequest } from './common/intf/IBaseRequest'
 export const Bootstrap = BootstrapComponent
+export type LocaleMobxStore = _LocaleMobxStore
+export type PrismicMobxStore = _PrismicMobxStore
 export namespace Plugins {
   export const Prismic = PrismicPlugin
   export const Locale = LocalePlugin
