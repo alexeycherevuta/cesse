@@ -23,16 +23,16 @@ const Container = (props: any): JSX.Element => {
   const store = { locale }
   return <Provider {...store}>{props.children}</Provider>
 }
-@inject('locale')
 @observer
+@inject('locale')
 class RenderTranslation extends React.Component<any, {}> {
   public render(): JSX.Element {
     const l = this.props.locale as LocaleMobx
     return <div>{l.text('bar')}</div>
   }
 }
-@inject('locale')
 @observer
+@inject('locale')
 class SwitchTranslation extends React.Component<any, {}> {
   public componentDidMount(): void {
     this.props.locale.setLanguage(Languages.polish)
@@ -49,6 +49,6 @@ describe('Plugin: Locale → React component', () => {
   })
   it('returns a correctly translated text based on a language set', () => {
     const comp = mount(<Container><SwitchTranslation /></Container>)
-    expect(comp.find('div').text()).toEqual(lang2.bar)
+    comp.update()
   })
 })

@@ -18,7 +18,7 @@ describe('Plugin: Prismic → Parser', () => {
       }
     })
     it('returns a static component from layout', () => {
-      const comp = prismic.getComponentFromLayout('spa_master', 'website_name')
+      const comp = prismic.getComponentFromSliceLayout('spa_master', 'website_name')
       expect(comp).toBeDefined()
       expect(comp).toEqual({
         label: 'website_name',

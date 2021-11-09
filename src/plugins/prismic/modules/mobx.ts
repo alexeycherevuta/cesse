@@ -14,7 +14,7 @@ interface IPrismicMobxConstructor {
   layoutNamePatterns?: string[]
   parsers?: IPrismicComponentParser[]
 }
-export default class PrismicMobxStore extends BaseMobxStore {
+export default class PrismicMobx extends BaseMobxStore {
   private functions: IPrismicComponentParser[]
   private layoutNamePatterns: string[]
   private url: string
@@ -37,7 +37,7 @@ export default class PrismicMobxStore extends BaseMobxStore {
   public withLanguage(lang: string): void {
     this.queryOptions.lang = lang
   }
-  public prismic: () => PrismicParser = computedFn(function getPrismicHelper(this: PrismicMobxStore): PrismicParser {
+  public prismic: () => PrismicParser = computedFn(function getPrismicHelper(this: PrismicMobx): PrismicParser {
     return toJS(this._parser)
   })
   @action async fetch(): Promise<void> {
