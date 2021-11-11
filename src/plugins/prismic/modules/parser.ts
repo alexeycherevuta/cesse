@@ -21,7 +21,7 @@ interface IPrismicParser {
   defineComponentParsers(converters: IPrismicComponentParser[]): void
   getContentType(name: string): IPrismicContentType[] | null
   getSlice(layout: string, slice: string): IPrismicSlice | null
-  getComponentFromSliceLayout(layout: string, label: string): IPrismicComponent | undefined
+  getComponentFromLayout(layout: string, label: string): IPrismicComponent | undefined
   getComponentFromSlice(layout: string, slice: string, label: string): IPrismicComponent | undefined
   parse(): void
 }
@@ -86,7 +86,7 @@ export default class PrismicParser implements IPrismicParser {
       ? ct[0].slices[slice]
       : null
   }
-  public getComponentFromSliceLayout(layout: string, label: string): IPrismicComponent | undefined {
+  public getComponentFromLayout(layout: string, label: string): IPrismicComponent | undefined {
     const l = this.getContentType(layout)
     if (l) {
       return l[0].components.find((component: IPrismicComponent) => component.label === label)

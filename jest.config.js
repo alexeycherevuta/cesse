@@ -27,7 +27,7 @@ module.exports = {
       branches: 10,
       functions: 10,
       lines: 10,
-      statements: -80
+      statements: -90
     }
   },
   setupFilesAfterEnv: [
