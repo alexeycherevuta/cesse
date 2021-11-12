@@ -1,6 +1,6 @@
-import { IKeyAny } from '../../../..'
 import LocaleMobx from '../modules/mobx'
 import Languages from '../props/Languages'
+import { IKeyAny } from '../../../common/intf/IKeyAny'
 const dummyA: IKeyAny = {
   foo: 'text',
   bar: 'sample',
