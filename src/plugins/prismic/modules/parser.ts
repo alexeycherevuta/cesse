@@ -128,7 +128,9 @@ export default class PrismicParser implements IPrismicParser {
     }
     const _components: IPrismicComponent[] = []
     keys.forEach((label: string) => {
-      _components.push(this.convertRawDataToComponent(label, data[label][0]))
+      if (data.hasOwnProperty(label) && Array.isArray(data[label]) && data[label].length > 0) {
+        _components.push(this.convertRawDataToComponent(label, data[label][0]))
+      }
     })
     return _components
   }
