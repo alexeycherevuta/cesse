@@ -55,7 +55,7 @@ export const prismicQueryResponse = (): IKeyAny => {
         first_publication_date: '2020-04-24T07:33:52+0000',
         last_publication_date: '2020-05-12T08:28:05+0000',
         slugs: [
-          'accelerate-tutors',
+          'fake-people',
           'hello-world'
         ],
         linked_documents: [
@@ -67,7 +67,7 @@ export const prismicQueryResponse = (): IKeyAny => {
           website_name: [
             {
               type: 'heading1',
-              text: 'Accelerate Tutors',
+              text: 'fake people',
               spans: [
               ]
             }
@@ -371,7 +371,7 @@ export const prismicQueryResponse = (): IKeyAny => {
                       ]
                     }
                   ],
-                  box_text: 'Access to the UKs top teaching talent from the comfort of your own home, our tutors are focussed on driving development whilst boosting confidence through engaging and inspiring sessions.'
+                  box_text: 'Access to the UKs top teaching talent from the comfort of your own home, our people are focussed on driving development whilst boosting confidence through engaging and inspiring sessions.'
                 },
                 {
                   box_icon: {
@@ -386,12 +386,12 @@ export const prismicQueryResponse = (): IKeyAny => {
                   box_title: [
                     {
                       type: 'heading4',
-                      text: 'Accelerate learning',
+                      text: 'fake learning',
                       spans: [
                       ]
                     }
                   ],
-                  box_text: 'Our tutors can lend a guiding hand throughout the transition from primary to secondary, SATs boosters, GCSE and A Level prep, plus general Maths, English, Science\nor any subject specific support.'
+                  box_text: 'Our people can lend a guiding hand throughout the transition from primary to secondary, SATs boosters, GCSE and A Level prep, plus general Maths, English, Science\nor any subject specific support.'
                 }
               ],
               primary: {
@@ -411,7 +411,7 @@ export const prismicQueryResponse = (): IKeyAny => {
                     }
                   ],
                   box_headline: null,
-                  box_text: '1:1 sessions can be online or face-to-face, our tutors are passionate about education and deeply committed to providing the highest standards of additional support.',
+                  box_text: '1:1 sessions can be online or face-to-face, our people are passionate about education and deeply committed to providing the highest standards of additional support.',
                   box_hyperlink: {
                     link_type: 'Web',
                     url: 'https:
@@ -685,4 +685,218 @@ export const prismicQueryResponse = (): IKeyAny => {
     version: '8991d98',
     license: 'All Rights Reserved'
   }
+}
+export const prismicQueryWithRepeatableResponse = (): IKeyAny => {
+  return {
+    page: 1,
+    results_per_page: 20,
+    results_size: 4,
+    total_results_size: 4,
+    total_pages: 1,
+    next_page: null,
+    prev_page: null,
+    results: [
+       {
+          id: 'XsLG1hEAAJLD8SOJ',
+          uid: null,
+          type: 'page',
+          href: 'https:
+          tags: [],
+          first_publication_date: '2020-05-18T17:35:13+0000',
+          last_publication_date: '2020-05-21T11:01:38+0000',
+          slugs: [
+             '1--1-tuition'
+          ],
+          linked_documents: [],
+          lang: 'en-gb',
+          alternate_languages: [],
+          data: {
+             page_title: [
+                {
+                   type: 'heading1',
+                   text: '1 : 1 tuition',
+                   spans: []
+                }
+             ],
+             page_reference: 'pageOneToOne',
+             page_banner: {
+                dimensions: {
+                   width: 1600,
+                   height: 503
+                },
+                alt: null,
+                copyright: null,
+                url: 'https:
+             },
+             page_content: [
+                {
+                   type: 'heading3',
+                   text: 'Boost attainment and grades with our trusted people',
+                   spans: []
+                },
+                {
+                   type: 'paragraph',
+                   text: 'Whatever the level, age or ability, from early years to A Level and SEN, our people have got the curriculum covered. With prices per session starting from £20 per hour, 1 : 1 tuition from our fully qualified teachers can provide a huge boost to attainment levels and exam results. ',
+                   spans: []
+                },
+                {
+                   type: 'heading3',
+                   text: 'Face-to-face',
+                   spans: []
+                }
+             ],
+             page_button_label: null,
+             page_button_link: {
+                link_type: 'Any'
+             },
+             page_quote: 'I was really pleased with',
+             page_quote_author: 'Rebecca, Liverpool April 2020'
+          }
+       },
+       {
+          id: 'XsLH7REAAGrD8SiK',
+          uid: null,
+          type: 'page',
+          href: 'https:
+          tags: [],
+          first_publication_date: '2020-05-18T17:37:52+0000',
+          last_publication_date: '2020-05-21T10:57:43+0000',
+          slugs: [
+             'safeguarding'
+          ],
+          linked_documents: [],
+          lang: 'en-gb',
+          alternate_languages: [],
+          data: {
+             page_title: [
+                {
+                   type: 'heading1',
+                   text: 'Safeguarding',
+                   spans: []
+                }
+             ],
+             page_reference: 'pageSafeguarding',
+             page_banner: {
+                dimensions: {
+                   width: 1600,
+                   height: 503
+                },
+                alt: null,
+                copyright: null,
+                url: 'https:
+             },
+             page_content: [
+                {
+                   type: 'paragraph',
+                   text: 'All of our people undergo stringent vetting procedures, so you can rest assured we uphold the highest possible safeguarding standards. All people undergo the following checks and vetting:',
+                   spans: []
+                }
+             ],
+             page_button_label: null,
+             page_button_link: {
+                link_type: 'Any'
+             },
+             page_quote: 'I was ',
+             page_quote_author: 'Rebecca, Liverpool April 2020'
+          }
+       },
+       {
+          id: 'XqKWXRAAACQATQ1W',
+          uid: null,
+          type: 'spa_master',
+          href: 'https:
+          tags: [],
+          first_publication_date: '2020-04-24T07:33:52+0000',
+          last_publication_date: '2020-05-19T18:53:02+0000',
+          slugs: [
+             'fake-people',
+             'hello-world'
+          ],
+          linked_documents: [],
+          lang: 'en-gb',
+          alternate_languages: [],
+          data: {
+             website_name: [
+                {
+                   type: 'heading1',
+                   text: 'fake people',
+                   spans: []
+                }
+             ],
+             body: [
+                {
+                   slice_type: 'header',
+                   slice_label: null,
+                   items: [{}],
+                   primary: {
+                      header_logo: {
+                         dimensions: {
+                            width: 376,
+                            height: 107
+                         },
+                         alt: null,
+                         copyright: null,
+                         url: 'https:
+                      }
+                   }
+                }
+             ]
+          }
+       },
+       {
+          id: 'XsLHsREAAJLD8Sd-',
+          uid: null,
+          type: 'page',
+          href: 'https:
+          tags: [],
+          first_publication_date: '2020-05-18T17:36:57+0000',
+          last_publication_date: '2020-05-21T10:58:15+0000',
+          slugs: [
+             '1--few-group-tuition'
+          ],
+          linked_documents: [],
+          lang: 'en-gb',
+          alternate_languages: [],
+          data: {
+             page_title: [
+                {
+                   type: 'heading1',
+                   text: '1 : few group tuition',
+                   spans: []
+                }
+             ],
+             page_reference: 'pageOneToFew',
+             page_banner: {
+                dimensions: {
+                   width: 1600,
+                   height: 503
+                },
+                alt: null,
+                copyright: null,
+                url: 'https:
+             },
+             page_content: [
+                {
+                   type: 'paragraph',
+                   text: 'Joining a small, select group of 3-4 other pupils, our group sessions are a brilliant, cost-effective way to boost learning. Interactive and fun by being able to engage with other pupils, these sessions are sure to help with confidence and have been created with clear learning outcomes.',
+                   spans: []
+                },
+                {
+                   type: 'heading4',
+                   text: 'Free taster session! If you like the session and would like to book further sessions they are £17.99 thereafter on a pay as you go basis.',
+                   spans: []
+                },
+             ],
+             page_button_label: null,
+             page_button_link: {
+                link_type: 'Any'
+             },
+             page_quote: 'I was really pleased',
+             page_quote_author: 'Rebecca, Liverpool April 2020'
+          }
+       }
+    ],
+    version: '8991d98',
+    license: 'All Rights Reserved'
+ }
 }

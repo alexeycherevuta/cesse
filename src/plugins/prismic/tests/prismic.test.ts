@@ -1,4 +1,4 @@
-import { prismicQueryResponse } from '../factory'
+import { prismicQueryResponse, prismicQueryWithRepeatableResponse } from '../factory'
 import PrismicParser from '../modules/parser'
 describe('Plugin: Prismic → Parser', () => {
   describe('default settings', () => {
@@ -26,7 +26,7 @@ describe('Plugin: Prismic → Parser', () => {
         slice: null,
         firstOfKind: true,
         lastOfKind: true,
-        body: { tag: 'h1', spans: [], text: 'Accelerate Tutors' }
+        body: { tag: 'h1', spans: [], text: 'fake people' }
       })
     })
     it('returns a static component from slice', () => {
@@ -641,6 +641,315 @@ describe('Plugin: Prismic → Parser', () => {
               }
             }
           ]
+        }
+      ])
+    })
+    it('returns multiple components within a repeatable component', () => {
+      const otherPrismic = new PrismicParser({ prismicQueryResponse: prismicQueryWithRepeatableResponse() })
+      otherPrismic.parse()
+      expect(otherPrismic.getContentType('page')).toEqual([
+        {
+          components: [
+            {
+              body: {
+                spans: [
+                ],
+                tag: 'h1',
+                text: '1 : 1 tuition'
+              },
+              component: 'htmlTextComponent',
+              firstOfKind: true,
+              label: 'page_title',
+              lastOfKind: true,
+              slice: null
+            },
+            {
+              body: {
+                text: 'pageOneToOne'
+              },
+              component: 'textComponent',
+              firstOfKind: true,
+              label: 'page_reference',
+              lastOfKind: true,
+              slice: null
+            },
+            {
+              body: {
+                alt: '',
+                copyright: undefined,
+                dimensions: {
+                  height: 503,
+                  width: 1600
+                },
+                src: 'https:
+              },
+              component: 'imageComponent',
+              firstOfKind: true,
+              label: 'page_banner',
+              lastOfKind: true,
+              slice: null
+            },
+            {
+              body: {
+                spans: [
+                ],
+                tag: 'h3',
+                text: 'Boost attainment and grades with our trusted people'
+              },
+              component: 'htmlTextComponent',
+              firstOfKind: true,
+              label: 'page_content',
+              lastOfKind: true,
+              slice: null
+            },
+            {
+              body: {
+                text: ''
+              },
+              component: 'textComponent',
+              firstOfKind: true,
+              label: 'page_button_label',
+              lastOfKind: true,
+              slice: null
+            },
+            {
+              body: null,
+              component: null,
+              firstOfKind: true,
+              label: 'page_button_link',
+              lastOfKind: true,
+              slice: null
+            },
+            {
+              body: {
+                text: 'I was really pleased with'
+              },
+              component: 'textComponent',
+              firstOfKind: true,
+              label: 'page_quote',
+              lastOfKind: true,
+              slice: null
+            },
+            {
+              body: {
+                text: 'Rebecca, Liverpool April 2020'
+              },
+              component: 'textComponent',
+              firstOfKind: true,
+              label: 'page_quote_author',
+              lastOfKind: true,
+              slice: null
+            }
+          ],
+          id: 'XsLG1hEAAJLD8SOJ',
+          lang: 'en-gb',
+          last_publication: '2020-05-21T11:01:38+0000',
+          layout: false,
+          slices: [
+          ],
+          type: 'page'
+        },
+        {
+          components: [
+            {
+              body: {
+                spans: [
+                ],
+                tag: 'h1',
+                text: 'Safeguarding'
+              },
+              component: 'htmlTextComponent',
+              firstOfKind: true,
+              label: 'page_title',
+              lastOfKind: true,
+              slice: null
+            },
+            {
+              body: {
+                text: 'pageSafeguarding'
+              },
+              component: 'textComponent',
+              firstOfKind: true,
+              label: 'page_reference',
+              lastOfKind: true,
+              slice: null
+            },
+            {
+              body: {
+                alt: '',
+                copyright: undefined,
+                dimensions: {
+                  height: 503,
+                  width: 1600
+                },
+                src: 'https:
+              },
+              component: 'imageComponent',
+              firstOfKind: true,
+              label: 'page_banner',
+              lastOfKind: true,
+              slice: null
+            },
+            {
+              body: {
+                spans: [
+                ],
+                tag: 'p',
+                text: 'All of our people undergo stringent vetting procedures, so you can rest assured we uphold the highest possible safeguarding standards. All people undergo the following checks and vetting:'
+              },
+              component: 'htmlTextComponent',
+              firstOfKind: true,
+              label: 'page_content',
+              lastOfKind: true,
+              slice: null
+            },
+            {
+              body: {
+                text: ''
+              },
+              component: 'textComponent',
+              firstOfKind: true,
+              label: 'page_button_label',
+              lastOfKind: true,
+              slice: null
+            },
+            {
+              body: null,
+              component: null,
+              firstOfKind: true,
+              label: 'page_button_link',
+              lastOfKind: true,
+              slice: null
+            },
+            {
+              body: {
+                text: 'I was '
+              },
+              component: 'textComponent',
+              firstOfKind: true,
+              label: 'page_quote',
+              lastOfKind: true,
+              slice: null
+            },
+            {
+              body: {
+                text: 'Rebecca, Liverpool April 2020'
+              },
+              component: 'textComponent',
+              firstOfKind: true,
+              label: 'page_quote_author',
+              lastOfKind: true,
+              slice: null
+            }
+          ],
+          id: 'XsLH7REAAGrD8SiK',
+          lang: 'en-gb',
+          last_publication: '2020-05-21T10:57:43+0000',
+          layout: false,
+          slices: [
+          ],
+          type: 'page'
+        },
+        {
+          components: [
+            {
+              body: {
+                spans: [
+                ],
+                tag: 'h1',
+                text: '1 : few group tuition'
+              },
+              component: 'htmlTextComponent',
+              firstOfKind: true,
+              label: 'page_title',
+              lastOfKind: true,
+              slice: null
+            },
+            {
+              body: {
+                text: 'pageOneToFew'
+              },
+              component: 'textComponent',
+              firstOfKind: true,
+              label: 'page_reference',
+              lastOfKind: true,
+              slice: null
+            },
+            {
+              body: {
+                alt: '',
+                copyright: undefined,
+                dimensions: {
+                  height: 503,
+                  width: 1600
+                },
+                src: 'https:
+              },
+              component: 'imageComponent',
+              firstOfKind: true,
+              label: 'page_banner',
+              lastOfKind: true,
+              slice: null
+            },
+            {
+              body: {
+                spans: [
+                ],
+                tag: 'p',
+                text: 'Joining a small, select group of 3-4 other pupils, our group sessions are a brilliant, cost-effective way to boost learning. Interactive and fun by being able to engage with other pupils, these sessions are sure to help with confidence and have been created with clear learning outcomes.'
+              },
+              component: 'htmlTextComponent',
+              firstOfKind: true,
+              label: 'page_content',
+              lastOfKind: true,
+              slice: null
+            },
+            {
+              body: {
+                text: ''
+              },
+              component: 'textComponent',
+              firstOfKind: true,
+              label: 'page_button_label',
+              lastOfKind: true,
+              slice: null
+            },
+            {
+              body: null,
+              component: null,
+              firstOfKind: true,
+              label: 'page_button_link',
+              lastOfKind: true,
+              slice: null
+            },
+            {
+              body: {
+                text: 'I was really pleased'
+              },
+              component: 'textComponent',
+              firstOfKind: true,
+              label: 'page_quote',
+              lastOfKind: true,
+              slice: null
+            },
+            {
+              body: {
+                text: 'Rebecca, Liverpool April 2020'
+              },
+              component: 'textComponent',
+              firstOfKind: true,
+              label: 'page_quote_author',
+              lastOfKind: true,
+              slice: null
+            }
+          ],
+          id: 'XsLHsREAAJLD8Sd-',
+          lang: 'en-gb',
+          last_publication: '2020-05-21T10:58:15+0000',
+          layout: false,
+          slices: [
+          ],
+          type: 'page'
         }
       ])
     })

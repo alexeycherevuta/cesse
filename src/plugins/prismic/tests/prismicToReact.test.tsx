@@ -15,14 +15,14 @@ describe('Plugin: Prismic → React components', () => {
   it('render PrismicComponent returning `HtmlTextComponent`', () => {
     const wrapper = mount(<PrismicComponent component={prismic.getComponentFromLayout('spa_master', 'website_name')} />)
     expect(wrapper.find('h1').length).toBe(1)
-    expect(wrapper.find('h1').text()).toEqual('Accelerate Tutors')
+    expect(wrapper.find('h1').text()).toEqual('fake people')
   })
   it('render HtmlTextComponent`', () => {
     const comp = prismic.getComponentFromLayout('spa_master', 'website_name') as IPrismicComponent
     expect(comp).toBeDefined()
     const item = shallow(<HtmlTextComponent component={comp} />)
     expect(item.find('h1').length).toBe(1)
-    expect(item.find('h1').render().text()).toEqual('Accelerate Tutors')
+    expect(item.find('h1').render().text()).toEqual('fake people')
   })
   it('render `ImageComponent`', () => {
     const comp = prismic.getComponentFromSlice('spa_master', 'header', 'header_logo') as IPrismicComponent
