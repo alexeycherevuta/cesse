@@ -120,7 +120,7 @@ export default class PrismicParser implements IPrismicParser {
     })
     return _contentTypes
   }
-  private convertDataToComponents = (data: IKeyArray): IPrismicComponent[] => {
+  private convertDataToComponents = (data: IKeyAny | IKeyArray): IPrismicComponent[] => {
     const keys = Object.keys(data)
     const slicesIndex = keys.indexOf('body')
     if (slicesIndex !== -1) {
@@ -128,13 +128,21 @@ export default class PrismicParser implements IPrismicParser {
     }
     const _components: IPrismicComponent[] = []
     keys.forEach((label: string) => {
-      if (data.hasOwnProperty(label) && Array.isArray(data[label]) && data[label].length > 0) {
-        _components.push(this.convertRawDataToComponent(label, data[label][0]))
+      if (this.isComplexComponent(data, label)) {
+        const subcomponents: any[] = data[label]
+        if (subcomponents.length === 1) {
+          _components.push(this.convertRawDataToComponent(label, data[label][0]))
+        } else {
+          this.convertElementToComponent(_components, subcomponents, '', label)
+        }
       } else {
         _components.push(this.convertRawDataToComponent(label, data[label]))
       }
     })
     return _components
+  }
+  private isComplexComponent(data: IKeyAny, label: string): boolean {
+    return data.hasOwnProperty(label) && Array.isArray(data[label]) && data[label].length > 0
   }
   private convertBodyToSlices = (body: IKeyAny[]): any => {
     const _slices = _.groupBy(body, 'slice_type')
