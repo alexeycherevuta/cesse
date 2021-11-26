@@ -16,14 +16,14 @@ class Bootstrap extends React.Component<IBootstrapProps, {}> {
     const { routes } = this.props
     const components = (
       <Switch>
-        {routes.map((route: IBaseWebAppRoute) => this.renderRoute(route))}
+        {routes.map((route: IBaseWebAppRoute, index: number) => this.renderRoute(route, index))}
       </Switch>
     )
     return this.props.router === 'browser'
       ? <BrowserRouter>{components}</BrowserRouter>
       : <HashRouter>{components}</HashRouter>
   }
-  private renderRoute = (route: IBaseWebAppRoute): JSX.Element => {
+  private renderRoute = (route: IBaseWebAppRoute, index: number): JSX.Element => {
     if (route.redirectTo) {
       return (
         <Redirect
@@ -66,7 +66,7 @@ class Bootstrap extends React.Component<IBootstrapProps, {}> {
       )
     }
     const routeProps: any = {
-      key: uuidv4(),
+      key: `r_${index}`,
       component: () => FinalComponent
     }
     if (route.uri) {
