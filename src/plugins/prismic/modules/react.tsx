@@ -8,6 +8,15 @@ import { IPrismicSpan } from '../intf/IPrismicSpan'
 import { IPrismicComponent } from '../intf/IPrismicComponent'
 import { IPrismicComponentProps, IPrismicBaseComponentProps, IPrismicHyperlinkComponentProps } from '../intf/IPrismicReactComponent'
 import { IPrismicImageComponentBody, IPrismicHtmlTextComponentBody, IPrismicTextComponentBody, IPrismicHyperlinkComponentBody } from '../intf/IPrismicComponentBody'
+export const urlReplacer = (input: string): string => {
+  const toRelative = input.indexOf('https:
+  const toId = input.indexOf('
+  return toRelative
+    ? input.replace('https:
+    : toId
+      ? input.replace('https:
+      : input
+}
 export const PrismicComponent = ({ component }: IPrismicComponentProps): JSX.Element => {
   if (!component || _.isNull(component.component) || !component.label) {
     return <div>Error: component is `null`</div>
@@ -61,8 +70,10 @@ export const RichComponent = (props: IPrismicBaseComponentProps): JSX.Element =>
 }
 export const HtmlTextComponent = (props: IPrismicBaseComponentProps): JSX.Element => {
   const body = props.component.body as IPrismicHtmlTextComponentBody
-  let { tag } = body
-  if (tag === 'ul' || tag === 'ol') {
+  let tag = (body && body.tag)
+    ? body.tag
+    : 'span'
+  if (body && (body.tag === 'ul' || body.tag === 'ol')) {
     tag = 'li'
   }
   return React.createElement(tag, { key: uuidv4() }, <span dangerouslySetInnerHTML={createMarkup(resolveSpans(body.text, body.spans))} />
@@ -78,11 +89,8 @@ export const TextComponent = (props: IPrismicBaseComponentProps): JSX.Element =>
 }
 export const HyperlinkComponent = (props: IPrismicHyperlinkComponentProps): JSX.Element => {
   const body = props.component.body as IPrismicHyperlinkComponentBody
-  const toId = body.href.indexOf('
-  const href = toId
-    ? body.href.split('
-    : body.href
-  return <a key={uuidv4()} href={href} className="prismic--link" target={body.target && !toId ? body.target : ''}>{props.caption}</a>
+  const href = urlReplacer(body.href)
+  return <a key={uuidv4()} href={href} className="prismic--link" target={body.target || '_self'}>{props.caption}</a>
 }
 const resolveSpans = (text: string, spans: IPrismicSpan[]): string => {
   let _text = text

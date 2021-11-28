@@ -57,7 +57,7 @@ describe('Plugin: Prismic → React components', () => {
         expect(a.length).toBe(1)
         expect(a.prop('className')).toEqual('prismic--link')
         expect(a.text()).toEqual('click here')
-        expect(a.prop('target')).toEqual('')
+        expect(a.prop('target')).toEqual('_blank')
         expect(a.prop('href')).toEqual('#')
       }
     }

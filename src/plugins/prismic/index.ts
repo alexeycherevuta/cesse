@@ -14,6 +14,7 @@ export const Image: PrismicBaseComponentFunc = rc.ImageComponent
 export const Hyperlink: (props: IPrismicHyperlinkComponentProps) => JSX.Element = rc.HyperlinkComponent
 export const Parser = PrismicParser
 export const Store = PrismicMobxStore
+export const urlReplacer: (input: string) => string = rc.urlReplacer
 export { IPrismicSlices, IPrismicSlice, IPrismicContentType, IPrismicComponent } from './intf/IPrismicComponent'
 export { IPrismicRichComponentBody, IPrismicTextComponentBody, IPrismicImageComponentBody, IPrismicHyperlinkComponentBody, IPrismicHtmlTextComponentBody } from './intf/IPrismicComponentBody'
 export { IPrismicComponentParser, PrismicComponentConverterFunction } from './intf/IPrismicParser'
