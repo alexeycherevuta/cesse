@@ -81,7 +81,14 @@ export const HtmlTextComponent = (props: IPrismicBaseComponentProps): JSX.Elemen
 }
 export const ImageComponent = (props: IPrismicBaseComponentProps): JSX.Element => {
   const body = props.component.body as IPrismicImageComponentBody
-  return <img key={ uuidv4() } className="prismic--image" src={body.src} alt={body.alt || ''} />
+  const img = <img key={ uuidv4() } className="prismic--image" src={body.src} alt={body.alt || ''} />
+  if (body.alt) {
+    const link = body.alt === 'self'
+      ? body.src
+      : body.alt
+    return <a href={link} target="_blank">{img}</a>
+  }
+  return img
 }
 export const TextComponent = (props: IPrismicBaseComponentProps): JSX.Element => {
   const body = props.component.body as IPrismicTextComponentBody
