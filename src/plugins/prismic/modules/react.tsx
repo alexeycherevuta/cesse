@@ -86,7 +86,7 @@ export const ImageComponent = (props: IPrismicBaseComponentProps): JSX.Element =
     const link = body.alt === 'self'
       ? body.src
       : body.alt
-    return <a href={link} target="_blank">{img}</a>
+    return <a key={ uuidv4() } href={link} target="_blank">{img}</a>
   }
   return img
 }
@@ -113,9 +113,7 @@ const resolveSpan = (text: string, fragment: string, span: IPrismicSpan): string
     case PrismicSpans.hyperlink: {
       if (span.data) {
         const toId = span.data.url.indexOf('
-        const url = toId
-          ? span.data.url.split('
-          : span.data.url
+        const url = urlReplacer(span.data.url)
         html = React.createElement('a', {
           className: 'prismic--link',
           href: url,
