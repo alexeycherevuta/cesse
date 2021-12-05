@@ -92,7 +92,8 @@ describe('Plugin: Prismic → React components', () => {
       lastOfKind: true
     }
     const item = shallow(<PrismicComponent component={unknownComp} />)
-    expect(item.find('span').length).toEqual(1)
+    expect(item.find('div').length).toEqual(1)
+    expect(item.text()).toEqual('Error: component is `null`')
   })
   it('render not recognised component', () => {
     const otherComp: IPrismicComponent = {

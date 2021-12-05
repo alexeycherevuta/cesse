@@ -19,7 +19,7 @@ export const urlReplacer = (input: string): string => {
 }
 export const PrismicComponent = ({ component }: IPrismicComponentProps): JSX.Element => {
   if (!component || _.isNull(component.component) || !component.label) {
-    return <span />
+    return <div>Error: component is `null`</div>
   }
   switch (component.component) {
     case PrismicComponents.RichComponent: {
@@ -52,7 +52,7 @@ export const RichComponent = (props: IPrismicBaseComponentProps): JSX.Element =>
   body.forEach((sub: IPrismicComponent) => {
     const { lastOfKind } = sub
     const subBody: any = sub.body
-    if (subBody && subBody.tag && (subBody.tag === 'ol' || subBody.tag === 'ul')) {
+    if (subBody.tag === 'ol' || subBody.tag === 'ul') {
       genre.push(PrismicComponent({ component: sub }))
       if (lastOfKind) {
         const tag = subBody.tag
@@ -73,7 +73,7 @@ export const HtmlTextComponent = (props: IPrismicBaseComponentProps): JSX.Elemen
   let tag = (body && body.tag)
     ? body.tag
     : 'span'
-  if (body && body.tag && (body.tag === 'ul' || body.tag === 'ol')) {
+  if (body && (body.tag === 'ul' || body.tag === 'ol')) {
     tag = 'li'
   }
   return React.createElement(tag, { key: uuidv4() }, <span dangerouslySetInnerHTML={createMarkup(resolveSpans(body.text, body.spans))} />
